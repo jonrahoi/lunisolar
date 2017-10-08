@@ -1,4 +1,4 @@
-var jscal = {
+const jsCal = {
     /* helper functions */
     BOGUS:"bogus",
 
@@ -4035,8 +4035,11 @@ var jscal = {
         return this.list_range([this.losar(t_year - 1), this.losar(t_year)],
             this.gregorian_year_range(g_year));
     }
-};
-if (typeof exports !== 'undefined') {
-    exports.jscal = jscal;
-    exports.l = jscal;
+}
+
+export default {
+    getAllHolidaysForYear(year, options){
+        // generate the entire blob
+        return
+    }
 }
