@@ -2,15 +2,21 @@ import React from 'react';
 import {Stage, Group, Layer, Arc, Text, Rect} from 'react-konva';
 import CalendarDay from './CalendarDay';
 
-const days = new Array(31)
+const days = []
+
+for (let i=0; i< 31; i++){
+  days.push(i+1)
+}
 
 class CalendarMonth extends React.Component {
     render() {
       return (
           <Group>
               {days.map(d => {
+                console.log(`DAY: ${d}`)
                 // calculate rotation and all that
-                return <CalendarDay rotation={30} innerRadius={130.90} outerRadius={145.45}/>
+                const randRot = Math.round(Math.random()*360)
+                return <CalendarDay rotation={randRot} innerRadius={130.90} outerRadius={145.45}/>
               })}
           </Group>
       )
