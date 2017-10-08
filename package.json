@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "konva": "^1.7.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.13"
+    "react-konva": "^1.1.5",
+    "react-scripts": "1.0.13",
+    "typescript": "^2.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
