@@ -11,7 +11,7 @@ const cli = nopt(knownOpts, shortHands, process.argv, 2)
 
 const getAllHolidaysForYear = (year, options) => {
     // generate the entire blob
-    const fixed = jsCal.fixed_from_gregorian(jsCal.gregorian_date(year*1, jsCal.JANUARY, 1))
+    const fixed = jsCal.fixed_from_gregorian(jsCal.gregorian_date(year, jsCal.JANUARY, 1))
     return {
         "fixed" : fixed,
         "diwali" : jsCal.gregorian_from_fixed(jsCal.diwali(year)),
@@ -28,7 +28,10 @@ const getAllHolidaysForYear = (year, options) => {
         "daylight_saving_start" : jsCal.gregorian_from_fixed(jsCal.daylight_saving_start(year)),
         "daylight_saving_end" : jsCal.gregorian_from_fixed(jsCal.daylight_saving_end(year)),
         "hindu_lunar_year" : jsCal.hindu_lunar_from_fixed(fixed),
-        "old_hindu_lunar_year" : jsCal.old_hindu_lunar_from_fixed(fixed)
+        "old_hindu_lunar_year" : jsCal.old_hindu_lunar_from_fixed(fixed),
+        "miwlid_an_nabi" : jsCal.gregorian_from_fixed(jsCal.miwlid_an_nabi(year)),
+        "start_of_ramadan" : jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(9, 1, year)),
+        "end_of_ramadan" : jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(10, 1, year)-1)
     }
 }
 
