@@ -11,21 +11,33 @@ for (let i=0; i< 31; i++){
 class CalendarMonth extends React.Component {
     render() {
       return (
-          <Group>
+          /*<Group>
               {days.map(d => {
                 console.log(`DAY: ${d}`)
                 // calculate rotation and all that
                 const randRot = Math.round(Math.random()*360)
-                return <CalendarDay rotation={randRot} innerRadius={130.90} outerRadius={145.45}/>
+                return (<CalendarDay rotation={randRot} innerRadius={130.90} outerRadius={145.45}/>
+                )
               })}
+          </Group>*/
+          <Group>
+          <CalendarDay rotation={this.props.rotation} innerRadius={116.36} outerRadius={130.90} />
+          <CalendarDay rotation={this.props.rotation} innerRadius={130.90} outerRadius={145.45} />
+          <CalendarDay rotation={this.props.rotation} innerRadius={145.45} outerRadius={159.99} />
+          <CalendarDay rotation={this.props.rotation} innerRadius={159.99} outerRadius={174.54} />
+          <CalendarDay rotation={this.props.rotation+10} innerRadius={116.36} outerRadius={130.90} />
+          <CalendarDay rotation={this.props.rotation+10} innerRadius={130.90} outerRadius={145.45} />
+          <CalendarDay rotation={this.props.rotation+10} innerRadius={145.45} outerRadius={159.99} />
+          <CalendarDay rotation={this.props.rotation+10} innerRadius={159.99} outerRadius={174.54} />
           </Group>
+
       )
     }
   }
 export default CalendarMonth;
 
 
-/* <CalendarDay rotation={30} innerRadius={116.36} outerRadius={130.90} />
+        /* <CalendarDay rotation={30} innerRadius={116.36} outerRadius={130.90} />
             <CalendarDay rotation={30} innerRadius={130.90} outerRadius={145.45} />
             <CalendarDay rotation={30} innerRadius={145.45} outerRadius={159.99} />
             <CalendarDay rotation={30} innerRadius={159.99} outerRadius={174.54} />
