@@ -249,7 +249,7 @@ const jsCal = {
     "list_range":function (ell, range) {
         return ell.filter(function (x) {
             return this.is_in_range(x, range);
-        });
+        }.bind(this));
     },
 
     "interval":function (t0, t1) {
@@ -4037,9 +4037,4 @@ const jsCal = {
     }
 }
 
-export default {
-    getAllHolidaysForYear(year, options){
-        // generate the entire blob
-        return
-    }
-}
+module.exports = jsCal
