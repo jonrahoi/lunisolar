@@ -19,13 +19,13 @@ class CalendarMonth extends React.Component {
                 {var rotationFactor = 0}
                 return(
                   <Group>
-                <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={120} outerRadius={145} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={145} outerRadius={170} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={170} outerRadius={195} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={195} outerRadius={220} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={220} outerRadius={245} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={245} outerRadius={270} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={270} outerRadius={295} />
+                <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={120} outerRadius={145} color={this.props.color} />
+          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={145} outerRadius={170} color={this.props.color} />
+          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={170} outerRadius={195} color={this.props.color} />
+          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={195} outerRadius={220} color={this.props.color}/>
+          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={220} outerRadius={245} color={this.props.color}/>
+          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={245} outerRadius={270} color={this.props.color}/>
+          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={270} outerRadius={295} color={this.props.color}/>
                 </Group>
               )
 

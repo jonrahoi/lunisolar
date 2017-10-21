@@ -14,18 +14,18 @@ class CircularCalendar extends React.Component {
       </Group>*/
 
       <Group>
-        <CalendarMonth rotation={30}/>
-        <CalendarMonth rotation={60}/>
-        <CalendarMonth rotation={90}/>
-        <CalendarMonth rotation={120}/>
-        <CalendarMonth rotation={150}/>
-        <CalendarMonth rotation={180}/>
-        <CalendarMonth rotation={210}/>
-        <CalendarMonth rotation={240}/>
-        <CalendarMonth rotation={270}/>
-        <CalendarMonth rotation={300}/>
-        <CalendarMonth rotation={330}/>
-        <CalendarMonth rotation={360}/>
+        <CalendarMonth rotation={30} color={'#303030'}/>
+        <CalendarMonth rotation={60} color={'grey'}/>
+        <CalendarMonth rotation={90}color={'#303030'}/>
+        <CalendarMonth rotation={120}color={'grey'}/>
+        <CalendarMonth rotation={150}color={'#303030'}/>
+        <CalendarMonth rotation={180}color={'grey'}/>
+        <CalendarMonth rotation={210}color={'#303030'}/>
+        <CalendarMonth rotation={240}color={'grey'}/>
+        <CalendarMonth rotation={270}color={'#303030'}/>
+        <CalendarMonth rotation={300}color={'grey'}/>
+        <CalendarMonth rotation={330}color={'#303030'}/>
+        <CalendarMonth rotation={360}color={'grey'}/>
 
 
       </Group>

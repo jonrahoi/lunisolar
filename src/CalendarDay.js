@@ -2,7 +2,7 @@ import React from 'react';
 import {Stage, Layer, Arc, Text, Rect, Group} from 'react-konva';
 
 class CalendarDay extends React.Component {
-    /*componentDidMount(){
+    componentDidMount(){
       this.updateCalendar();
     }
 
@@ -10,10 +10,11 @@ class CalendarDay extends React.Component {
       const ctx = this.refs.arc.getContext('2d')
       console.log("this is the context and it works!!", ctx)
       console.log("this is get Canvas method",this.refs.arc.getClassName())
-      this.refs.arc.fillEnabled(true)
+      // this.refs.arc.fillEnabled(true)
+      this.refs.arc.fill(this.props.color)
     }
 
-    rect(props){
+    /*rect(props){
       const {ctx,x,y,width,height} = props
       ctx.beginPath()
       ctx.arc(200,75,50,80,30)
