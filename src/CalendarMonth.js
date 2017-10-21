@@ -1,35 +1,57 @@
 import React from 'react';
 import {Stage, Group, Layer, Arc, Text, Rect} from 'react-konva';
+import PropTypes from 'prop-types'
+
 import CalendarDay from './CalendarDay';
 
-const days = []
-const rotation = [0,7.5,15,22.5,30]
+const weeks = [1, 2, 3, 4]
+const rotation = [0, 7.5, 15, 22.5, 30]
+const daysOfWeek  = [1,2,3,4,5,6,7]
 
-for (let i=0; i< 4; i++){
-  days.push(i+1)
+// this.props.totalAngle = the size of the slice of the pie
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
-
-
 class CalendarMonth extends React.Component {
-    render() {
-            const numdays = days.map(d => {
+  static propTypes = {
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+    totalAngle: PropTypes.number.isRequired,
+    color: PropTypes.string.isRequired,
+    rotation: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    numMonths : PropTypes.number.isRequired
+  }
 
-                // calculate rotation and all that
-                {var rotationFactor = 0}
+    render() {
+            const myslice = Math.round(this.props.totalAngle / weeks.length)
+            console.log(`MYSLICE = ${myslice}`)
+
+            const numdays = weeks.map(w => {
+              const rot = this.props.rotation + (myslice * w)
                 return(
-                  <Group>
-                <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={120} outerRadius={145} color={this.props.color} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={145} outerRadius={170} color={this.props.color} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={170} outerRadius={195} color={this.props.color} />
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={195} outerRadius={220} color={this.props.color}/>
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={220} outerRadius={245} color={this.props.color}/>
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={245} outerRadius={270} color={this.props.color}/>
-          <CalendarDay rotation={this.props.rotation+rotation[d]} innerRadius={270} outerRadius={295} color={this.props.color}/>
+                <Group>
+                  { daysOfWeek.map((d, idx) => {
+                      const inner = 120 + (25 * idx)
+                      
+                      console.log(`ROT = ${rot}`)
+                      return <CalendarDay height={this.props.height} 
+                      width={this.props.width}
+                      weeks={weeks.length}
+                      numMonths={this.props.numMonths}
+                      key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={this.props.color} />})
+                  }
+
                 </Group>
               )
 
-             console.log(d);
               }
       )
       return(

@@ -1,31 +1,36 @@
 import React from 'react';
 import CalendarMonth from './CalendarMonth'
+import PropTypes from 'prop-types'
 
 import {Stage, Group, Layer, Arc, Text, Rect} from 'react-konva';
-const months = [1,2,3,4,5,6,7,8,9,10,11,12]
+const months = [1,2,3,4, 5, 6, 7, 8,9, 10, 11, 12]
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 class CircularCalendar extends React.Component {
+  static propTypes = {
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired
+  }
+
   render() {
+
     return (
-      /*<Group>
-        { months.map(m => {
-          return <CalendarMonth month={m} />
-        }) }
-      </Group>*/
 
       <Group>
-        <CalendarMonth rotation={30} color={'#303030'}/>
-        <CalendarMonth rotation={60} color={'grey'}/>
-        <CalendarMonth rotation={90}color={'#303030'}/>
-        <CalendarMonth rotation={120}color={'grey'}/>
-        <CalendarMonth rotation={150}color={'#303030'}/>
-        <CalendarMonth rotation={180}color={'grey'}/>
-        <CalendarMonth rotation={210}color={'#303030'}/>
-        <CalendarMonth rotation={240}color={'grey'}/>
-        <CalendarMonth rotation={270}color={'#303030'}/>
-        <CalendarMonth rotation={300}color={'grey'}/>
-        <CalendarMonth rotation={330}color={'#303030'}/>
-        <CalendarMonth rotation={360}color={'grey'}/>
+        {
+          months.map((m, idx) => {
+            const increment = Math.round(360 / months.length) - 0
+            return <CalendarMonth key={m} numMonths={months.length} rotation={increment * idx} width={this.props.width} height={this.props.height} color={getRandomColor()} totalAngle={increment} />
+          })
+        }
 
 
       </Group>

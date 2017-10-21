@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {Stage, Layer, Arc, Text, Rect, Group} from 'react-konva';
 
 class CalendarDay extends React.Component {
@@ -6,10 +7,17 @@ class CalendarDay extends React.Component {
       this.updateCalendar();
     }
 
+    static propTypes = {
+      height: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired,
+      numMonths: PropTypes.number.isRequired,
+      weeks: PropTypes.number.isRequired
+    }
+
     updateCalendar(){
       const ctx = this.refs.arc.getContext('2d')
-      console.log("this is the context and it works!!", ctx)
-      console.log("this is get Canvas method",this.refs.arc.getClassName())
+      // console.log("this is the context and it works!!", ctx)
+      // console.log("this is get Canvas method",this.refs.arc.getClassName())
       // this.refs.arc.fillEnabled(true)
       this.refs.arc.fill(this.props.color)
     }
@@ -23,16 +31,19 @@ class CalendarDay extends React.Component {
     }*/
 
     render() {
+      const angle = Math.round(360 / (this.props.numMonths * this.props.weeks))
+      console.log(`ANGLE=${angle}`)
       return (
           <Group>
           <Arc
               ref="arc"
               rotation={this.props.rotation}
-              x={300}
-              y={300}
+              x={this.props.width / 2}
+              y={this.props.height / 2}
               innerRadius={this.props.innerRadius}
               outerRadius={this.props.outerRadius}
-              angle={7.5}
+              opacity={0.5}
+              angle={angle}
               fill={"#CCC"}  //use #CCC
               shadowBlur={2}
             />
