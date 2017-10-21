@@ -26,6 +26,8 @@ class CircularCalendar extends React.Component {
         <CalendarMonth rotation={300}/>
         <CalendarMonth rotation={330}/>
         <CalendarMonth rotation={360}/>
+
+
       </Group>
     )
   }

@@ -31,24 +31,11 @@ class CalendarDay extends React.Component {
               y={300}
               innerRadius={this.props.innerRadius}
               outerRadius={this.props.outerRadius}
-              angle={10}
+              angle={7.5}
               fill={"#CCC"}  //use #CCC
               shadowBlur={2}
             />
-            <Text
-              x={310}
-              y={310}
-              text={"a"}
-              rotation={30}
-              align={"center"}
-              fill={"green"}
-              fontSize={10}
-              fontFamily={"Calibri"}
-              color={"black"}
-              width={300}
-              padding={20}
-              align={"center"}
-            />
+
           </Group>
       )
     }
