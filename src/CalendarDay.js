@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {Stage, Layer, Arc, Text, Rect, Group} from 'react-konva';
+import {Stage, Layer, Arc, Text, Group} from 'react-konva';
 
 class CalendarDay extends React.Component {
     componentDidMount(){
@@ -31,15 +31,15 @@ class CalendarDay extends React.Component {
     }*/
 
     render() {
-      const angle = Math.round(360 / (this.props.numMonths * this.props.weeks))
+      const angle = 360 / (this.props.numMonths * this.props.weeks)
       console.log(`ANGLE=${angle}`)
       return (
           <Group>
           <Arc
               ref="arc"
               rotation={this.props.rotation}
-              x={this.props.width / 2}
-              y={this.props.height / 2}
+              x={this.props.width/2}
+              y={this.props.height/2}
               innerRadius={this.props.innerRadius}
               outerRadius={this.props.outerRadius}
               opacity={0.5}

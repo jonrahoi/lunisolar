@@ -2,8 +2,8 @@ import React from 'react';
 import CalendarMonth from './CalendarMonth'
 import PropTypes from 'prop-types'
 
-import {Stage, Group, Layer, Arc, Text, Rect} from 'react-konva';
-const months = [1,2,3,4, 5, 6, 7, 8,9, 10, 11, 12]
+import {Stage, Group, Layer, Arc, Text} from 'react-konva';
+const months = [1,2,3,4, 5, 6, 7, 8,9, 10,11,12]
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -21,18 +21,15 @@ class CircularCalendar extends React.Component {
   }
 
   render() {
-
     return (
-
       <Group>
-        {
-          months.map((m, idx) => {
-            const increment = Math.round(360 / months.length) - 0
-            return <CalendarMonth key={m} numMonths={months.length} rotation={increment * idx} width={this.props.width} height={this.props.height} color={getRandomColor()} totalAngle={increment} />
-          })
-        }
-
-
+      {
+        months.map((m, idx) => {
+          const increment = Math.round(360 / months.length)
+          console.log(`increment = ${increment*idx}`);
+          return <CalendarMonth key={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={getRandomColor()} totalAngle={increment} />
+        })
+      }
       </Group>
     )
   }

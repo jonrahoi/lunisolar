@@ -1,11 +1,10 @@
 import React from 'react';
-import {Stage, Group, Layer, Arc, Text, Rect} from 'react-konva';
+import {Stage, Group, Layer, Arc, Text} from 'react-konva';
 import PropTypes from 'prop-types'
 
 import CalendarDay from './CalendarDay';
 
-const weeks = [1, 2, 3, 4]
-const rotation = [0, 7.5, 15, 22.5, 30]
+const weeks = [1, 2,3,4]
 const daysOfWeek  = [1,2,3,4,5,6,7]
 
 // this.props.totalAngle = the size of the slice of the pie
@@ -30,35 +29,35 @@ class CalendarMonth extends React.Component {
     numMonths : PropTypes.number.isRequired
   }
 
-    render() {
-            const myslice = Math.round(this.props.totalAngle / weeks.length)
-            console.log(`MYSLICE = ${myslice}`)
+  render() {
+    const myslice =this.props.totalAngle / weeks.length
+    console.log(`MYSLICE = ${myslice}`)
 
-            const numdays = weeks.map(w => {
-              const rot = this.props.rotation + (myslice * w)
-                return(
-                <Group>
-                  { daysOfWeek.map((d, idx) => {
-                      const inner = 120 + (25 * idx)
-                      
-                      console.log(`ROT = ${rot}`)
-                      return <CalendarDay height={this.props.height} 
-                      width={this.props.width}
-                      weeks={weeks.length}
-                      numMonths={this.props.numMonths}
-                      key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={this.props.color} />})
-                  }
-
-                </Group>
-              )
-
-              }
-      )
+    const numdays = weeks.map(w => {
+      const rot = this.props.rotation + (myslice * w)  //30+(30*1)
       return(
         <Group>
-        {numdays}
+        { daysOfWeek.map((d, idx) => {
+          const inner = 120 + (25 * idx)
+
+          console.log(`ROT = ${rot}`)
+          return <CalendarDay height={this.props.height}
+          width={this.props.width}
+          weeks={weeks.length}
+          numMonths={this.props.numMonths}
+          key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={this.props.color} />})
+        }
+
         </Group>
       )
+
     }
-  }
+  )
+  return(
+    <Group>
+    {numdays}
+    </Group>
+  )
+}
+}
 export default CalendarMonth;
