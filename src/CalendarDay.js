@@ -5,12 +5,15 @@ import {Stage, Layer, Arc, Text, Group} from 'react-konva';
 class CalendarDay extends React.Component {
     componentDidMount(){
       this.updateCalendar();
+      // this.refs.arc.
+      // console.log(this.refs.arc.attrs.x, this.refs.arc.attrs.y)
     }
 
     static propTypes = {
       height: PropTypes.number.isRequired,
       width: PropTypes.number.isRequired,
       numMonths: PropTypes.number.isRequired,
+      dayNum : PropTypes.number.isRequired,
       weeks: PropTypes.number.isRequired
     }
 
@@ -29,10 +32,16 @@ class CalendarDay extends React.Component {
       ctx.stroke()
       ctx.fillText("hello",90,75)
     }*/
-
+    /**
+     * start at x, y
+     * go via angle, plus inner radius
+     */
     render() {
       const angle = 360 / (this.props.numMonths * this.props.weeks)
       console.log(`ANGLE=${angle}`)
+      const textX = this.props.width/2 + this.props.innerRadius * Math.cos(this.props.rotation * (Math.PI / 180))
+      const textY = this.props.height/2 + this.props.innerRadius * Math.sin(this.props.rotation * (Math.PI / 180))
+
       return (
           <Group>
           <Arc
@@ -47,6 +56,7 @@ class CalendarDay extends React.Component {
               fill={"#CCC"}  //use #CCC
               shadowBlur={2}
             />
+            <Text text={`${this.props.dayNum}`} x={textX} y={textY} />
 
           </Group>
       )

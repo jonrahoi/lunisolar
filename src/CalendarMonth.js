@@ -44,6 +44,7 @@ class CalendarMonth extends React.Component {
           return <CalendarDay height={this.props.height}
           width={this.props.width}
           weeks={weeks.length}
+          dayNum={this.props.month * d}
           numMonths={this.props.numMonths}
           key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={this.props.color} />})
         }
