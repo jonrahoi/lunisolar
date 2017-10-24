@@ -37,10 +37,12 @@ class CalendarDay extends React.Component {
      * go via angle, plus inner radius
      */
     render() {
-      const angle = 360 / (this.props.numMonths * this.props.weeks)
-      console.log(`ANGLE=${angle}`)
-      const textX = this.props.width/2 + (this.props.innerRadius + 25) * Math.cos(this.props.rotation * (Math.PI / 180))
-      const textY = this.props.height/2 + (this.props.innerRadius + 25) * Math.sin(this.props.rotation * (Math.PI / 180))
+      const p = this.props
+      const angle = 360 / (p.numMonths * p.weeks)
+      
+      const textX = p.width/2 + (p.innerRadius + 25) * Math.cos(p.rotation * (Math.PI / 180))
+
+      const textY = p.height/2 + (p.innerRadius + 25) * Math.sin(p.rotation * (Math.PI / 180))
 
       return (
           <Group>
@@ -53,10 +55,10 @@ class CalendarDay extends React.Component {
               outerRadius={this.props.outerRadius}
               opacity={0.5}
               angle={angle}
-              fill={"#CCC"}  //use #CCC
+              fill={this.props.color}  //use #CCC
               shadowBlur={2}
             />
-            <Text text={`${this.props.dayNum}`} x={textX} y={textY} />
+            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'white'} />
 
           </Group>
       )
