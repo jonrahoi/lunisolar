@@ -41,10 +41,10 @@ class CalendarDay extends React.Component {
     render() {
       const p = this.props
       const angle = 360 / (p.numMonths * p.weeks)
-      
-      const textX = p.width/2 + (p.innerRadius + 25) * Math.cos(p.rotation * (Math.PI / 180))
 
-      const textY = p.height/2 + (p.innerRadius + 25) * Math.sin(p.rotation * (Math.PI / 180))
+      const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
+
+      const textY = p.height/2 + (p.innerRadius + 11.5) *  Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
 
       return (
           <Group>

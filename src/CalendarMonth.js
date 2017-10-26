@@ -43,14 +43,14 @@ class CalendarMonth extends React.Component {
           const inner = 120 + (25 * idx)
           const day = (this.props.month-1) * 28 + (w*d);
           console.log(`DAYOFYEAR = ${day} ROT = ${rot}`)
-          return <CalendarDay 
+          return <CalendarDay
           height={this.props.height}
           width={this.props.width}
           weeks={weeks.length}
           month={this.props.month}
           dayNum={w*d}
           numMonths={this.props.numMonths}
-          key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={getColor(day*2)} />})
+          key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={getColor(day*2)} myslice={myslice}/>})
         }
 
         </Group>
