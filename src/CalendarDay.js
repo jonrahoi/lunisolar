@@ -58,7 +58,7 @@ class CalendarDay extends React.Component {
               opacity={1}
               angle={angle}
             />
-            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'black'} />
+            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'black'} fontSize={10} />
 
           </Group>
       )

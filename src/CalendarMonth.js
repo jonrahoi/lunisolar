@@ -48,7 +48,7 @@ class CalendarMonth extends React.Component {
           width={this.props.width}
           weeks={weeks.length}
           month={this.props.month}
-          dayNum={w*d}
+          dayNum={d+(7*(w-1))}
           numMonths={this.props.numMonths}
           key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={getColor(day*2)} myslice={myslice}/>})
         }
