@@ -25,8 +25,9 @@ class CircularCalendar extends React.Component {
       <Group>
       {
         months.map((m, idx) => {
+          console.log(`MONTH ${m}`)
           const increment = Math.round(360 / months.length)
-          console.log(`increment = ${increment*idx}`);
+          // console.log(`increment = ${increment*idx}`);
           let color = "#909090"
           if(idx%2==0) color = "#303030"
           return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} />

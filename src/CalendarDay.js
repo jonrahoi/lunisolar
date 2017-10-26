@@ -14,7 +14,9 @@ class CalendarDay extends React.Component {
       width: PropTypes.number.isRequired,
       numMonths: PropTypes.number.isRequired,
       dayNum : PropTypes.number.isRequired,
-      weeks: PropTypes.number.isRequired
+      color: PropTypes.string.isRequired,
+      weeks: PropTypes.number.isRequired,
+      month: PropTypes.number.isRequired
     }
 
     updateCalendar(){
@@ -53,12 +55,10 @@ class CalendarDay extends React.Component {
               y={this.props.height/2}
               innerRadius={this.props.innerRadius}
               outerRadius={this.props.outerRadius}
-              opacity={0.5}
+              opacity={1}
               angle={angle}
-              fill={this.props.color}  //use #CCC
-              shadowBlur={2}
             />
-            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'white'} />
+            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'black'} />
 
           </Group>
       )

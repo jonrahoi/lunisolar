@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "color": "^2.0.0",
     "konva": "^1.7.0",
     "nopt": "^4.0.1",
     "react": "^15.6.1",
