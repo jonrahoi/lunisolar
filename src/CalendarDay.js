@@ -69,7 +69,7 @@ class CalendarDay extends React.Component {
               opacity={1}
               angle={angle}
             />
-            <Text text={this.props.displayDate} x={textX} y={textY} fill={'black'} fontSize={9}  />
+            <Text text={this.props.displayDate} x={textX} y={textY} fill={'black'} fontSize={9} align={"right"} />
 
           </Group>
       )

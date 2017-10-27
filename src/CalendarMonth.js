@@ -3,6 +3,7 @@ import {Stage, Group, Layer, Arc, Text} from 'react-konva';
 import PropTypes from 'prop-types'
 import * as Color from 'color'
 import CalendarDay from './CalendarDay';
+import MonthName from './MonthName'
 
 const weeks = [1,2,3,4,5]
 const daysOfWeek  = [1,2,3,4,5,6,7]
@@ -85,6 +86,8 @@ class CalendarMonth extends React.Component {
   return(
     <Group>
     {numdays}
+    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {400} height={this.props.height}
+    width={this.props.width} textRotation = {this.props.month*30}/>
     </Group>
   )
 }
