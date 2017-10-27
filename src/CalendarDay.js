@@ -2,11 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import {Stage, Layer, Arc, Text, Group} from 'react-konva';
 
+
+let factor;
+
+
 class CalendarDay extends React.Component {
+
+
+
     componentDidMount(){
       this.updateCalendar();
       // this.refs.arc.
       // console.log(this.refs.arc.attrs.x, this.refs.arc.attrs.y)
+      factor = this.props.startDay - 1
+      console.log("componentDidMount", factor)
     }
 
     static propTypes = {
@@ -26,6 +35,8 @@ class CalendarDay extends React.Component {
       // this.refs.arc.fillEnabled(true)
       this.refs.arc.fill(this.props.color)
     }
+
+
 
     /*rect(props){
       const {ctx,x,y,width,height} = props
@@ -58,7 +69,7 @@ class CalendarDay extends React.Component {
               opacity={1}
               angle={angle}
             />
-            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'black'} fontSize={10} />
+            <Text text={this.props.displayDate} x={textX} y={textY} fill={'black'} fontSize={9}  />
 
           </Group>
       )
