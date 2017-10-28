@@ -2,11 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import {Stage, Layer, Arc, Text, Group} from 'react-konva';
 
+
+let factor;
+
+
 class CalendarDay extends React.Component {
+
+
+
     componentDidMount(){
       this.updateCalendar();
       // this.refs.arc.
       // console.log(this.refs.arc.attrs.x, this.refs.arc.attrs.y)
+      factor = this.props.startDay - 1
+      console.log("componentDidMount", factor)
     }
 
     static propTypes = {
@@ -14,7 +23,9 @@ class CalendarDay extends React.Component {
       width: PropTypes.number.isRequired,
       numMonths: PropTypes.number.isRequired,
       dayNum : PropTypes.number.isRequired,
-      weeks: PropTypes.number.isRequired
+      color: PropTypes.string.isRequired,
+      weeks: PropTypes.number.isRequired,
+      month: PropTypes.number.isRequired
     }
 
     updateCalendar(){
@@ -24,6 +35,8 @@ class CalendarDay extends React.Component {
       // this.refs.arc.fillEnabled(true)
       this.refs.arc.fill(this.props.color)
     }
+
+
 
     /*rect(props){
       const {ctx,x,y,width,height} = props
@@ -42,7 +55,11 @@ class CalendarDay extends React.Component {
 
       const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
 
+<<<<<<< HEAD
       const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
+=======
+      const textY = p.height/2 + (p.innerRadius + 11.5) *  Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
+>>>>>>> display-date-on-right-day
 
       return (
           <Group>
@@ -53,12 +70,14 @@ class CalendarDay extends React.Component {
               y={this.props.height/2}
               innerRadius={this.props.innerRadius}
               outerRadius={this.props.outerRadius}
-              opacity={0.5}
+              opacity={1}
               angle={angle}
-              fill={this.props.color}  //use #CCC
-              shadowBlur={2}
             />
+<<<<<<< HEAD
             <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'white'} fontSize={10} />
+=======
+            <Text text={this.props.displayDate} x={textX} y={textY} fill={'black'} fontSize={9} align={"right"} />
+>>>>>>> display-date-on-right-day
 
           </Group>
       )

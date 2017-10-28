@@ -20,16 +20,26 @@ class CircularCalendar extends React.Component {
     width: PropTypes.number.isRequired
   }
 
+  passFirstDay(m){
+    let dateString = m.toString();
+    let firstDayOfMonth = new Date(`${dateString}/1/2019`)
+    console.log("the date I got is",firstDayOfMonth);
+    let startDay = firstDayOfMonth.getDay()
+    console.log(`startDay for ${m} is ${startDay}`);
+    return (startDay)
+  }
+
   render() {
     return (
       <Group>
       {
         months.map((m, idx) => {
+          console.log(`MONTH ${m}`)
           const increment = Math.round(360 / months.length)
-          console.log(`increment = ${increment*idx}`);
+          // console.log(`increment = ${increment*idx}`);
           let color = "#909090"
           if(idx%2==0) color = "#303030"
-          return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} />
+          return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} startDay = {this.passFirstDay(m)}/>
         })
       }
       </Group>
