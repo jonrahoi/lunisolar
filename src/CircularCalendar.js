@@ -22,7 +22,7 @@ class CircularCalendar extends React.Component {
 
   passFirstDay(m){
     let dateString = m.toString();
-    let firstDayOfMonth = new Date(`${dateString}/1/2018`)
+    let firstDayOfMonth = new Date(`${dateString}/1/2019`)
     console.log("the date I got is",firstDayOfMonth);
     let startDay = firstDayOfMonth.getDay()
     console.log(`startDay for ${m} is ${startDay}`);
