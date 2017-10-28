@@ -46,8 +46,6 @@ class CalendarMonth extends React.Component {
   getDateText(d,w){
     const dayN = d+(7*(w-1));
     const displayDate = dayN - ((this.props.startDay+1) - 1);
-    console.log(`the start day for month ${this.props.month} is ${this.props.startDay}`);
-    console.log("factor got is", displayDate);
     if(displayDate<1 || displayDate> 31)
     return ""
     return (displayDate)
@@ -68,10 +66,8 @@ class CalendarMonth extends React.Component {
       return(
         <Group>
         { daysOfWeek.map((d, idx) => {
-          console.log(`DAY ${d}`)
           const inner = 150 + (30 * idx)
           const day = (this.props.month-1) * 28 + (w*d);
-          console.log(`DAYOFYEAR = ${day} ROT = ${rot}`)
           return <CalendarDay
           height={this.props.height}
           width={this.props.width}
@@ -86,7 +82,8 @@ class CalendarMonth extends React.Component {
           rotation={rot}
           innerRadius={inner}
           outerRadius={inner+30}
-          color={getColor(day*2)}
+          //color={getColor(day*2)}
+          color={this.props.color}
           myslice={myslice}
           textFont={d+5}/>})
         }
@@ -98,7 +95,7 @@ class CalendarMonth extends React.Component {
   return(
     <Group>
     {numdays}
-    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {400} height={this.props.height}
+    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {380} height={this.props.height}
     width={this.props.width}/>
     </Group>
   )

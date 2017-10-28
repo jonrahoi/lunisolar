@@ -38,10 +38,13 @@ console.log("what this", monthName[month]);
 
   render(){
       const p = this.props
-    const textX = p.width/2 + (p.outerRadius) * Math.cos((p.rotation+30) * (Math.PI / 180))
-    const textY = p.height/2 + (p.outerRadius) *  Math.sin((p.rotation+30) * (Math.PI / 180))
+    const textX = p.width/2 + (p.outerRadius) * Math.cos((p.rotation+10) * (Math.PI / 180))
+    console.log(`width ${p.width} outerRadius ${p.outerRadius} rotation ${p.rotation} textX ${textX}`);
+    const textY = p.height/2 + (p.outerRadius) *  Math.sin((p.rotation+10) * (Math.PI / 180))
+    console.log(`height ${p.height} outerRadius ${p.outerRadius} rotation ${p.rotation} textY ${textY}`);
+
   return(
-  <Text text={this.getMonthName()} x={textX} y={textY} fill={'black'} fontSize={20} rotation={125+this.props.rotation}/>
+  <Text text={this.getMonthName()} x={textX} y={textY} fill={'black'} fontSize={20} rotation={105+this.props.rotation}/>
 )
 }
 }
