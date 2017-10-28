@@ -5,7 +5,7 @@ import * as Color from 'color'
 import CalendarDay from './CalendarDay';
 import MonthName from './MonthName'
 
-const weeks = [1,2,3,4,5]
+const weeks = [1,2,3,4,5,6]
 const daysOfWeek  = [1,2,3,4,5,6,7]
 
 // this.props.totalAngle = the size of the slice of the pie
@@ -87,7 +87,7 @@ class CalendarMonth extends React.Component {
     <Group>
     {numdays}
     <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {400} height={this.props.height}
-    width={this.props.width} textRotation = {this.props.month*30}/>
+    width={this.props.width} textRotation = {0}/>
     </Group>
   )
 }
