@@ -99,7 +99,7 @@ class CalendarMonth extends React.Component {
     <Group>
     {numdays}
     <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {400} height={this.props.height}
-    width={this.props.width} textRotation = {0}/>
+    width={this.props.width}/>
     </Group>
   )
 }

@@ -41,7 +41,7 @@ console.log("what this", monthName[month]);
     const textX = p.width/2 + (p.outerRadius) * Math.cos((p.rotation+30) * (Math.PI / 180))
     const textY = p.height/2 + (p.outerRadius) *  Math.sin((p.rotation+30) * (Math.PI / 180))
   return(
-  <Text text={this.getMonthName()} x={textX} y={textY} fill={'black'} fontSize={20} rotation={this.props.textRotation}/>
+  <Text text={this.getMonthName()} x={textX} y={textY} fill={'black'} fontSize={20} rotation={125+this.props.rotation}/>
 )
 }
 }
