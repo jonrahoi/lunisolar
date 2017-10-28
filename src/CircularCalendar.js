@@ -1,6 +1,7 @@
 import React from 'react';
 import CalendarMonth from './CalendarMonth'
 import PropTypes from 'prop-types'
+import YearToggle from './YearToggle'
 
 import {Stage, Group, Layer, Arc, Text} from 'react-konva';
 const months = [1,2,3,4, 5, 6, 7, 8,9, 10,11,12]
@@ -20,9 +21,19 @@ class CircularCalendar extends React.Component {
     width: PropTypes.number.isRequired
   }
 
+  componentWillMount(){
+    this.setState(
+      {currentYear:this.props.yearText}
+    );
+  }
+
+  handleClick = (updatedYear)=>{
+    this.setState({currentYear:updatedYear});
+  };
+
   passFirstDay(m){
     let dateString = m.toString();
-    let firstDayOfMonth = new Date(`${dateString}/1/2019`)
+    let firstDayOfMonth = new Date(`${dateString}/1/${this.state.currentYear}`)
     console.log("the date I got is",firstDayOfMonth);
     let startDay = firstDayOfMonth.getDay()
     console.log(`startDay for ${m} is ${startDay}`);
@@ -42,6 +53,7 @@ class CircularCalendar extends React.Component {
           return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} startDay = {this.passFirstDay(m)}/>
         })
       }
+      <YearToggle width={800} height={800} text = {this.state.currentYear} handleClick={this.handleClick.bind(this)}/>
       </Group>
     )
   }

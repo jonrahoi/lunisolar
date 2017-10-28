@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import CircularCalendar from './CircularCalendar'
+import YearToggle from './YearToggle'
 import {Stage, Group, Layer} from 'react-konva';
 
 const style = {
@@ -11,7 +12,8 @@ ReactDOM.render(
     <Stage width={800} height={800} style={style}>
         <Layer>
             <Group>
-                <CircularCalendar width={800} height={800} />
+                <CircularCalendar width={800} height={800} yearText = {2017} />
+
             </Group>
         </Layer>
     </Stage>, document.getElementById('root'))

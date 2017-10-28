@@ -19,13 +19,7 @@ const getColor = (dayNum) => {
   return color.hex()
 }
 
-<<<<<<< HEAD
-const handleMouse = () => {
-  console.log("got called");
-}
-=======
 const startDay = new Date('1/1/2019')
->>>>>>> display-date-on-right-day
 
 class CalendarMonth extends React.Component {
   static propTypes = {
@@ -38,8 +32,6 @@ class CalendarMonth extends React.Component {
     numMonths : PropTypes.number.isRequired
   }
 
-<<<<<<< HEAD
-=======
   componentDidMount(){
 
 
@@ -57,7 +49,6 @@ class CalendarMonth extends React.Component {
   }
 
 
->>>>>>> display-date-on-right-day
 
 
   render() {
@@ -66,29 +57,12 @@ class CalendarMonth extends React.Component {
 
     const numdays = weeks.map((w,midx) => {
       const rot = this.props.rotation + (myslice * w)  //30+(30*1)
-<<<<<<< HEAD
-      let dayNumber = 0;
-      return(
-        <Group>
-        { daysOfWeek.map((d, idx) => {
-          const inner = 120 + (25 * idx)
-
-          console.log(`ROT = ${rot}`)
-          return <CalendarDay height={this.props.height}
-          on={"mouseOver",handleMouse()}
-          width={this.props.width}
-          weeks={weeks.length}
-          dayNum={d+(7*(w-1))}
-          numMonths={this.props.numMonths}
-          key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+25} color={this.props.color} myslice={myslice}/>})
-
-=======
       console.log(`WEEK ${w}`)
       return(
         <Group>
         { daysOfWeek.map((d, idx) => {
           console.log(`DAY ${d}`)
-          const inner = 150 + (30 * idx)
+          const inner = 140 + (30 * idx)
           const day = (this.props.month-1) * 28 + (w*d);
           console.log(`DAYOFYEAR = ${day} ROT = ${rot}`)
           return <CalendarDay
@@ -102,7 +76,6 @@ class CalendarMonth extends React.Component {
           d = {d}
           displayDate = {this.getDateText(d,w)}
           key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+30} color={getColor(day*2)} myslice={myslice}/>})
->>>>>>> display-date-on-right-day
         }
 
         </Group>
