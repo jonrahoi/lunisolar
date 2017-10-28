@@ -25,7 +25,8 @@ class CalendarDay extends React.Component {
       dayNum : PropTypes.number.isRequired,
       color: PropTypes.string.isRequired,
       weeks: PropTypes.number.isRequired,
-      month: PropTypes.number.isRequired
+      month: PropTypes.number.isRequired,
+      textFont: PropTypes.number.isRequired
     }
 
     updateCalendar(){
@@ -55,12 +56,7 @@ class CalendarDay extends React.Component {
 
       const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
 
-<<<<<<< HEAD
       const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
-=======
-      const textY = p.height/2 + (p.innerRadius + 11.5) *  Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
->>>>>>> display-date-on-right-day
-
       return (
           <Group>
           <Arc
@@ -73,12 +69,8 @@ class CalendarDay extends React.Component {
               opacity={1}
               angle={angle}
             />
-<<<<<<< HEAD
-            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'white'} fontSize={10} />
-=======
-            <Text text={this.props.displayDate} x={textX} y={textY} fill={'black'} fontSize={9} align={"right"} />
->>>>>>> display-date-on-right-day
 
+            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'white'} fontSize={this.props.textFont} />
           </Group>
       )
     }
