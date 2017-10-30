@@ -19,11 +19,6 @@ const getColor = (dayNum) => {
   return color.hex()
 }
 
-
-/*const handleMouse = () => {
-  console.log("got called");
-}*/
-
 const startDay = new Date('1/1/2019')
 
 
@@ -55,18 +50,19 @@ class CalendarMonth extends React.Component {
 
 
 
+
   render() {
     const myslice = this.props.totalAngle / weeks.length
     // console.log(`MYSLICE = ${myslice}`)
 
     const numdays = weeks.map((w,midx) => {
       const rot = this.props.rotation + (myslice * w)  //30+(30*1)
-
-      let dayNumber = 0;
+      console.log(`WEEK ${w}`)
       return(
         <Group>
         { daysOfWeek.map((d, idx) => {
-          const inner = 150 + (30 * idx)
+          console.log(`DAY ${d}`)
+          const inner = 140 + (30 * idx)
           const day = (this.props.month-1) * 28 + (w*d);
           return <CalendarDay
           height={this.props.height}

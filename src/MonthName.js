@@ -25,13 +25,11 @@ class MonthName extends React.Component {
   }
 
   componentDidMount(){
-    console.log(`the rotation for ${monthName[this.props.monthn]} is ${this.props.rotation}`)
   }
 
 
   getMonthName(){
     const month  = this.props.monthn
-console.log("what this", monthName[month]);
      return (monthName[month])
 
   }

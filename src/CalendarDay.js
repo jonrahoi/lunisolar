@@ -70,7 +70,7 @@ class CalendarDay extends React.Component {
               angle={angle}
             />
 
-            <Text text={`${this.props.dayNum}`} x={textX} y={textY} fill={'white'} fontSize={this.props.textFont} />
+            <Text text={this.props.displayDate} x={textX} y={textY} fill={'white'} fontSize={this.props.textFont} />
           </Group>
       )
     }
