@@ -35,5 +35,7 @@ const getAllHolidaysForYear = (year, options) => {
     }
 }
 
-console.log(`cli.year = ${cli.year}`)
-console.log(getAllHolidaysForYear(cli.year))
+// console.log(`cli.year = ${cli.year}`)
+// console.log(getAllHolidaysForYear(cli.year))
+
+module.exports = getAllHolidaysForYear
