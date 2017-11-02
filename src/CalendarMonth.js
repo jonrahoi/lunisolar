@@ -27,7 +27,7 @@ class CalendarMonth extends React.Component {
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     totalAngle: PropTypes.number.isRequired,
-    //color: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     rotation: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
     numMonths : PropTypes.number.isRequired
@@ -38,18 +38,7 @@ constructor(props){
   this.setState({ishoLiday:0})
 }
 
-  //componentWillUpdate(nextProps,nextState){
-    // console.log("hey I got all these holidays",this.props.holidayForMonth);
-    //
-    // console.log("And my month is ",this.props.month);
-    //if(nextState.ishoLiday===1 && this.state.ishoLiday===0)
-    //this.state.ishoLiday = 1;
 
-  //}
-
-// componentDidMount(){
-//     this.setState({ishoLiday:0})
-// }
 
 
   getDateText(d,w){

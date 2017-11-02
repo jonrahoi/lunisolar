@@ -10,18 +10,12 @@ class CalendarDay extends React.Component {
 
   constructor(props){
     super(props)
-    console.log("what am i", this.props.holiDAY);
   }
 
 
     componentDidMount(){
       this.updateCalendar();
-      // this.refs.arc.
-      // console.log(this.refs.arc.attrs.x, this.refs.arc.attrs.y)
       factor = this.props.startDay - 1
-      //console.log("componentDidMount", factor)
-      //console.log("did mount", this.props.displayDate );
-      //console.log("the holidays for this month are",this.props.holidayForMonth);
 
     }
 
@@ -38,20 +32,16 @@ class CalendarDay extends React.Component {
 
     updateCalendar(){
       const ctx = this.refs.arc.getContext('2d')
-      // console.log("this is the context and it works!!", ctx)
-      // console.log("this is get Canvas method",this.refs.arc.getClassName())
       this.refs.arc.fillEnabled(true)
       this.refs.arc.fill(this.props.color)
   }
 
     componentDidUpdate(){
-      //console.log("what is in calday",this.props.holidayForMonth);
       const ctx = this.refs.arc.getContext('2d')
       this.refs.arc.fillEnabled(true)
 
       if(this.props.ishoLiday===1){
-        // console.log("sup", this.props.holidayForMonth[this.props.displayDate]);
-        //this.setState({ishoLiday: 1});
+
 
         this.refs.arc.fill("red")
 
@@ -61,13 +51,7 @@ class CalendarDay extends React.Component {
     }
 
 
-    /*rect(props){
-      const {ctx,x,y,width,height} = props
-      ctx.beginPath()
-      ctx.arc(200,75,50,80,30)
-      ctx.stroke()
-      ctx.fillText("hello",90,75)
-    }*/
+
     /**
      * start at x, y
      * go via angle, plus inner radius
