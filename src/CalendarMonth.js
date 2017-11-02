@@ -10,8 +10,6 @@ const daysOfWeek  = [1,2,3,4,5,6,7]
 
 // this.props.totalAngle = the size of the slice of the pie
 
-
-
 const getColor = (dayNum) => {
   const color = Color(`hsl(${dayNum}, 100%, 50%)`)
   const [r, g, b] = color.rgb().array()
@@ -20,7 +18,6 @@ const getColor = (dayNum) => {
 }
 
 const startDay = new Date('1/1/2019')
-
 
 class CalendarMonth extends React.Component {
   static propTypes = {
@@ -33,11 +30,6 @@ class CalendarMonth extends React.Component {
     numMonths : PropTypes.number.isRequired
   }
 
-  componentDidMount(){
-
-
-  }
-
   getDateText(d,w){
     const dayN = d+(7*(w-1));
     const displayDate = dayN - ((this.props.startDay+1) - 1);
@@ -47,21 +39,15 @@ class CalendarMonth extends React.Component {
 
   }
 
-
-
-
-
   render() {
     const myslice = this.props.totalAngle / weeks.length
     // console.log(`MYSLICE = ${myslice}`)
 
     const numdays = weeks.map((w,midx) => {
       const rot = this.props.rotation + (myslice * w)  //30+(30*1)
-      console.log(`WEEK ${w}`)
       return(
         <Group>
         { daysOfWeek.map((d, idx) => {
-          console.log(`DAY ${d}`)
           const inner = 140 + (30 * idx)
           const day = (this.props.month-1) * 28 + (w*d);
           return <CalendarDay
