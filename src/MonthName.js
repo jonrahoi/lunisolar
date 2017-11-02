@@ -24,27 +24,20 @@ class MonthName extends React.Component {
     super(props)
   }
 
-  componentDidMount(){
-  }
-
-
   getMonthName(){
     const month  = this.props.monthn
-     return (monthName[month])
+    return (monthName[month])
 
   }
 
   render(){
-      const p = this.props
+    const p = this.props
     const textX = p.width/2 + (p.outerRadius) * Math.cos((p.rotation+10) * (Math.PI / 180))
-    console.log(`width ${p.width} outerRadius ${p.outerRadius} rotation ${p.rotation} textX ${textX}`);
     const textY = p.height/2 + (p.outerRadius) *  Math.sin((p.rotation+10) * (Math.PI / 180))
-    console.log(`height ${p.height} outerRadius ${p.outerRadius} rotation ${p.rotation} textY ${textY}`);
-
-  return(
-  <Text text={this.getMonthName()} x={textX} y={textY} fill={'black'} fontSize={20} rotation={105+this.props.rotation}/>
-)
-}
+    return(
+      <Text text={this.getMonthName()} x={textX} y={textY} fill={'black'} fontSize={20} rotation={105+this.props.rotation}/>
+    )
+  }
 }
 
 export default MonthName;

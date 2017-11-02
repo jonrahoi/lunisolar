@@ -2,6 +2,7 @@ import React from 'react';
 import CalendarMonth from './CalendarMonth'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
+import SelectCalendar from './SelectCalendar'
 
 
 import {Stage, Group, Layer, Arc, Text} from 'react-konva';
@@ -97,9 +98,7 @@ this.setState(
   passFirstDay(m){
     let dateString = m.toString();
     let firstDayOfMonth = new Date(`${dateString}/1/${this.state.currentYear}`)
-    console.log("the date I got is",firstDayOfMonth);
     let startDay = firstDayOfMonth.getDay()
-    console.log(`startDay for ${m} is ${startDay}`);
     return (startDay)
   }
 
@@ -108,7 +107,6 @@ this.setState(
       <Group>
       {
         months.map((m, idx) => {
-          console.log(`MONTH ${m}`)
           const increment = Math.round(360 / months.length)
           // console.log(`increment = ${increment*idx}`);
           let color = "#909090"
@@ -116,7 +114,7 @@ this.setState(
           return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} startDay = {this.passFirstDay(m)} holidayForMonth = {this.state.monthHolidayObjState[m]}/>
         })
       }
-      <YearToggle width={800} height={800} text = {this.state.currentYear} handleClick={this.handleClick.bind(this)}/>
+      <YearToggle width={this.props.width} height={this.props.height} text = {this.state.currentYear} handleClick={this.handleClick.bind(this)}/>
       </Group>
     )
   }
