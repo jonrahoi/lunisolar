@@ -12,12 +12,12 @@ const daysOfWeek  = [1,2,3,4,5,6,7]
 
 
 
-const getColor = (dayNum) => {
-  const color = Color(`hsl(${dayNum}, 100%, 50%)`)
-  const [r, g, b] = color.rgb().array()
-  // console.log(`${r}-${g}-${b} COLOR=${color}`)
-  return color.hex()
-}
+// const getColor = (dayNum) => {
+//   const color = Color(`hsl(${dayNum}, 100%, 50%)`)
+//   const [r, g, b] = color.rgb().array()
+//   // console.log(`${r}-${g}-${b} COLOR=${color}`)
+//   return color.hex()
+// }
 
 const startDay = new Date('1/1/2019')
 
@@ -27,26 +27,52 @@ class CalendarMonth extends React.Component {
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     totalAngle: PropTypes.number.isRequired,
-    color: PropTypes.string.isRequired,
+    //color: PropTypes.string.isRequired,
     rotation: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
     numMonths : PropTypes.number.isRequired
   }
 
-  componentDidMount(){
+constructor(props){
+  super(props)
+  this.setState({ishoLiday:0})
+}
 
+  //componentWillUpdate(nextProps,nextState){
+    // console.log("hey I got all these holidays",this.props.holidayForMonth);
+    //
+    // console.log("And my month is ",this.props.month);
+    //if(nextState.ishoLiday===1 && this.state.ishoLiday===0)
+    //this.state.ishoLiday = 1;
 
-  }
+  //}
+
+// componentDidMount(){
+//     this.setState({ishoLiday:0})
+// }
+
 
   getDateText(d,w){
     const dayN = d+(7*(w-1));
     const displayDate = dayN - ((this.props.startDay+1) - 1);
     if(displayDate<1 || displayDate> 31)
     return ""
+    if(displayDate in this.props.holidayForMonth)
+    console.log("today is a holiday",this.props.holidayForMonth[displayDate]);
+    //this.setState({ishoLiday:1})
     return (displayDate)
 
   }
 
+
+getHoliday(d,w){
+  const dd = this.getDateText(d,w)
+  if(dd in this.props.holidayForMonth){
+    return 1
+  } else {
+    return 0
+  }
+}
 
 
 
@@ -81,7 +107,9 @@ class CalendarMonth extends React.Component {
           //color={getColor(day*2)}
           color={this.props.color}
           myslice={myslice}
-          textFont={d+5}/>})
+          textFont={d+5}
+          ishoLiday = {this.getHoliday(d,w)}
+          holidayForMonth={this.props.holidayForMonth}/>})
         }
         </Group>
       )

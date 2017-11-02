@@ -3,8 +3,28 @@ import CalendarMonth from './CalendarMonth'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
 
+
 import {Stage, Group, Layer, Arc, Text} from 'react-konva';
+const getAllHolidaysForYear = require('./test/calTest.js');
+
 const months = [1,2,3,4, 5, 6, 7, 8,9, 10,11,12]
+
+
+
+let monthHolidayObj = {
+  1: {},
+  2: {},
+  3: {},
+  4: {},
+  5 :{},
+  6:{},
+  7:{},
+  8:{},
+  9:{},
+  10:{},
+  11:{},
+  12:{}
+};
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -23,13 +43,56 @@ class CircularCalendar extends React.Component {
 
   componentWillMount(){
     this.setState(
-      {currentYear:this.props.yearText}
+      {currentYear:this.props.yearText,
+        monthHolidayObjState:monthHolidayObj
+      }
     );
   }
 
   handleClick = (updatedYear)=>{
     this.setState({currentYear:updatedYear});
+
+    //console.log("check this",getAllHolidaysForYear(updatedYear));
+    const spec = getAllHolidaysForYear(updatedYear)
+    //console.log("Diwali",spec.diwali);
+    this.populateHolidays(spec)
   };
+
+  populateHolidays(spec){
+
+
+  Object.keys(monthHolidayObj).map(function(key, index) {
+    monthHolidayObj[index] = {}
+  });
+
+    Object.keys(spec).map(function(key, index) {
+    console.log(`The holiday is ${key} and month is ${spec[key].month}`);
+    //console.log(`the holiday for month ${spec[key].month} is ${key}`);
+    const holArray = monthHolidayObj[spec[key].month]
+
+    //const holObj = []
+    // holObj.push(spec[key].day)
+    // holObj.push(key)
+
+    let holObj = {}
+    holObj = {[spec[key].day]:key}
+    //console.log("what is this that I constructed",holObj);
+
+    if(holArray!==undefined)
+    holArray[spec[key].day] = holObj
+    //monthHolidayObj[spec[key].month] =  hol
+});
+
+console.log("what is the object I constructed",monthHolidayObj);
+this.setState(
+  {
+    monthHolidayObjState:monthHolidayObj
+  }
+)
+
+  }
+
+
 
   passFirstDay(m){
     let dateString = m.toString();
@@ -50,7 +113,7 @@ class CircularCalendar extends React.Component {
           // console.log(`increment = ${increment*idx}`);
           let color = "#909090"
           if(idx%2==0) color = "#303030"
-          return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} startDay = {this.passFirstDay(m)}/>
+          return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} startDay = {this.passFirstDay(m)} holidayForMonth = {this.state.monthHolidayObjState[m]}/>
         })
       }
       <YearToggle width={800} height={800} text = {this.state.currentYear} handleClick={this.handleClick.bind(this)}/>
