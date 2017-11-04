@@ -11,7 +11,6 @@ const daysOfWeek  = [1,2,3,4,5,6,7]
 // this.props.totalAngle = the size of the slice of the pie
 
 
-
 const getColor = (dayNum) => {
   const color = Color(`hsl(${dayNum}, 100%, 50%)`)
   const [r, g, b] = color.rgb().array()
@@ -32,24 +31,35 @@ class CalendarMonth extends React.Component {
     numMonths : PropTypes.number.isRequired
   }
 
-  componentDidMount(){
+constructor(props){
+  super(props)
+  this.setState({ishoLiday:0})
+}
 
 
-  }
+
 
   getDateText(d,w){
     const dayN = d+(7*(w-1));
     const displayDate = dayN - ((this.props.startDay+1) - 1);
-    console.log(`the start day for month ${this.props.month} is ${this.props.startDay}`);
-    console.log("factor got is", displayDate);
     if(displayDate<1 || displayDate> 31)
     return ""
+    if(displayDate in this.props.holidayForMonth)
+    console.log("today is a holiday",this.props.holidayForMonth[displayDate]);
+    //this.setState({ishoLiday:1})
     return (displayDate)
 
   }
 
 
-
+getHoliday(d,w){
+  const dd = this.getDateText(d,w)
+  if(dd in this.props.holidayForMonth){
+    return 1
+  } else {
+    return 0
+  }
+}
 
   render() {
     const myslice = this.props.totalAngle / weeks.length
@@ -57,14 +67,11 @@ class CalendarMonth extends React.Component {
 
     const numdays = weeks.map((w,midx) => {
       const rot = this.props.rotation + (myslice * w)  //30+(30*1)
-      console.log(`WEEK ${w}`)
       return(
         <Group>
         { daysOfWeek.map((d, idx) => {
-          console.log(`DAY ${d}`)
-          const inner = 150 + (30 * idx)
+          const inner = 140 + (30 * idx)
           const day = (this.props.month-1) * 28 + (w*d);
-          console.log(`DAYOFYEAR = ${day} ROT = ${rot}`)
           return <CalendarDay
           height={this.props.height}
           width={this.props.width}
@@ -75,9 +82,17 @@ class CalendarMonth extends React.Component {
           startDay = {startDay.getDay()+1}
           d = {d}
           displayDate = {this.getDateText(d,w)}
-          key={`${d}${w}${this.props.month}`} rotation={rot} innerRadius={inner} outerRadius={inner+30} color={getColor(day)} myslice={myslice}/>})
+          key={`${d}${w}${this.props.month}`}
+          rotation={rot}
+          innerRadius={inner}
+          outerRadius={inner+30}
+          //color={getColor(day*2)}
+          color={this.props.color}
+          myslice={myslice}
+          textFont={d+5}
+          ishoLiday = {this.getHoliday(d,w)}
+          holidayForMonth={this.props.holidayForMonth}/>})
         }
-
         </Group>
       )
 
@@ -86,8 +101,8 @@ class CalendarMonth extends React.Component {
   return(
     <Group>
     {numdays}
-    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {400} height={this.props.height}
-    width={this.props.width} textRotation = {0}/>
+    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {380} height={this.props.height}
+    width={this.props.width}/>
     </Group>
   )
 }
