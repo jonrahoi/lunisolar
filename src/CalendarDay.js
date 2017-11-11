@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {Stage, Layer, Arc, Text, Group} from 'react-konva';
+import {Stage, Layer, Arc, Text, Group, Konva} from 'react-konva';
 
 let factor;
 
 class CalendarDay extends React.Component {
+
+  constructor(props){
+    super(props)
+       this.state = { isMouseInside: false}
+
+  }
+
     componentDidMount(){
       this.updateCalendar();
       factor = this.props.startDay - 1
@@ -41,6 +48,33 @@ class CalendarDay extends React.Component {
     }
     }
 
+    hover(){
+       let mousePos = this.refs.arc.getStage().getPointerPosition();
+       let holidayText = ""
+       if(this.props.ishoLiday===1){
+         holidayText = "Holiday!!"
+       }
+      this.setState({
+        isMouseInside: true,
+        tooltipFont : 20,
+        toolTipx : mousePos.x + 5,
+        toolTipY : mousePos.y + 5,
+        tooltipText : holidayText
+      });
+
+    }
+
+    mouseLeave(){
+      this.setState({
+        isMouseInside: false,
+        tooltipFont : 0,
+        toolTipx : 0,
+        toolTipY : 0,
+        tooltipText : ""
+      });
+
+    }
+
 
     /**
      * start at x, y
@@ -63,8 +97,13 @@ class CalendarDay extends React.Component {
               opacity={1}
               angle={angle}
               color = {this.getColor}
+              onMouseEnter = {this.hover.bind(this)}
+              onMouseLeave = {this.mouseLeave.bind(this)}
             />
             <Text text={this.props.displayDate} x={textX} y={textY} fill={'white'} fontSize={this.props.textFont} />
+
+            <Text text={this.state.tooltipText} x={this.state.toolTipx} y = {this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"}/>
+
           </Group>
       )
     }
