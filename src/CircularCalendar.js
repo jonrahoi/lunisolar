@@ -2,18 +2,17 @@ import React from 'react';
 import CalendarMonth from './CalendarMonth'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
-import SelectCalendar from './SelectCalendar'
 import {Stage, Group, Layer, Arc, Text} from 'react-konva';
 const getAllHolidaysForYear = require('./test/calTest.js');
 
-const months = [1,2,3,4, 5, 6, 7, 8,9, 10,11,12]
+const months = [1,2,3,4,5,6,7,8,9,10,11,12]
 
 let monthHolidayObj = {
-  1: {},
-  2: {},
-  3: {},
-  4: {},
-  5 :{},
+  1:{},
+  2:{},
+  3:{},
+  4:{},
+  5:{},
   6:{},
   7:{},
   8:{},
@@ -40,8 +39,8 @@ class CircularCalendar extends React.Component {
   componentWillMount(){
     this.setState(
       {
-        currentYear:this.props.yearText,
-        monthHolidayObjState:monthHolidayObj,
+        currentYear: this.props.yearText,
+        monthHolidayObjState: Object.assign({}, monthHolidayObj),
         selectedCalendar: this.props.selectedCalendar
       }
     );
@@ -50,7 +49,6 @@ class CircularCalendar extends React.Component {
   handleClick = (updatedYear)=>{
     this.setState({currentYear:updatedYear});
     const spec = getAllHolidaysForYear(updatedYear)
-    console.log("spec is ",spec);
     this.populateHolidays(spec)
   };
 
@@ -60,11 +58,10 @@ class CircularCalendar extends React.Component {
     });
 
     Object.keys(spec).map(function(region, index) {
-      console.log("region is ",region);
       Object.keys(spec[region]).map((holiday, idx) =>{
-        console.log(`The holiday is ${holiday} and month is ${spec[region][holiday].month} ; day is ${spec[region][holiday].day}`);
+        //console.log(`region is ${region} ; month is ${spec[region][holiday].month} ; day is ${spec[region][holiday].day} ; holiday is ${holiday}`);
         const holArray = monthHolidayObj[spec[region][holiday].month]
-
+console.log("holArray ",holArray);
         let holObj = {}
         holObj = {[spec[region][holiday].day]:holiday, holidaycolor: calendar[region]} //assign the holiday to respective day
 
@@ -73,12 +70,13 @@ class CircularCalendar extends React.Component {
       });
     });
 
-    console.log("holiday list ",monthHolidayObj);
     this.setState(
       {
-        monthHolidayObjState:monthHolidayObj
+        monthHolidayObjState: Object.assign({}, monthHolidayObj)
       }
     )
+
+    console.log(`this.state.monthHolidayObjState[m] is ${this.state.monthHolidayObjState}`);
   }
 
   passFirstDay(m){
@@ -88,27 +86,34 @@ class CircularCalendar extends React.Component {
     return (startDay)
   }
 
-  colorSelection = (dataFromSelectCalendar) => {
-    console.log("received from select calendar ",dataFromSelectCalendar);
-  }
-
   render() {
     return (
       <Group>
-      {
-        Object.keys(calendar).map((c,idx)=>{
-          return <SelectCalendar width={this.props.width/10} height={this.props.height/10+(idx*40)} calendar={c} calendarColor={calendar[c]} colorSelection={this.colorSelection.bind(this)}/>
-        })
-      }
+
       {
         months.map((m, idx) => {
           const increment = Math.round(360 / months.length)
           let color = "#909090"
           if(idx%2 == 0) color = "#303030"
-          return <CalendarMonth key={m} month={m} numMonths={months.length} rotation={increment*idx} width={this.props.width} height={this.props.height} color={color} totalAngle={increment} startDay={this.passFirstDay(m)} holidayForMonth={this.state.monthHolidayObjState[m]}/>
+          return <CalendarMonth
+          key={m}
+          month={m}
+          numMonths={months.length}
+          rotation={increment*idx}
+          width={this.props.width}
+          height={this.props.height}
+          color={color}
+          totalAngle={increment}
+          startDay={this.passFirstDay(m)}
+          holidayForMonth={this.state.monthHolidayObjState[m]}
+          />
         })
       }
-      <YearToggle width={this.props.width} height={this.props.height} text={this.state.currentYear} handleClick={this.handleClick.bind(this)}/>
+      <YearToggle
+      width={this.props.width}
+      height={this.props.height}
+      text={this.state.currentYear}
+      handleClick={this.handleClick.bind(this)}/>
       </Group>
     )
   }
