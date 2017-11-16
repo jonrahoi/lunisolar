@@ -3,9 +3,7 @@ import CalendarMonth from './CalendarMonth'
 import PropTypes from 'prop-types'
 import {Stage, Layer, Arc, Text, Group, Rect, Arrow, Circle} from 'react-konva';
 
-const mouseStyle =  {
-  cursor:"pointer"
-}
+
 
 class YearToggle extends React.Component {
 
@@ -58,21 +56,29 @@ class YearToggle extends React.Component {
     clearInterval(this.state.interval)
   }
 
+  mouseStyle(){
+    this.refs.shape.getStage().container().style.cursor = 'pointer';
+  }
+
+  changeMouseStyle(){
+    this.refs.shape.getStage().container().style.cursor = 'default';
+  }
+
   render(){
 
     return(
       <Group>
-      <Rect width = {30} height = {30} x = {this.props.width/2-40} y={this.props.height/2-10} fill={"blue"} onClick = {this.mouseClickBackward.bind(this)}/>
-      <Arrow x={this.props.width/2-30} y={this.props.height/2+5} fill = {"white"} rotation = {180} onClick = {this.mouseClickBackward.bind(this)} />
+      <Rect ref="shape" width = {30} height = {30} x = {this.props.width/2-40} y={this.props.height/2-10} fill={"blue"} onClick = {this.mouseClickBackward.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Arrow ref="shape" x={this.props.width/2-30} y={this.props.height/2+5} fill = {"white"} rotation = {180} onClick = {this.mouseClickBackward.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)} />
       <Text x = {this.props.width/2} y = {this.props.height/2} text={this.state.year}/>
-      <Rect width = {30} height = {30} x = {this.props.width/2+40} y={this.props.height/2-10} fill={"blue"} onClick = {this.mouseClickForward.bind(this)}/>
-      <Arrow x={this.props.width/2+60} y={this.props.height/2+5} fill = {"white"}  onClick = {this.mouseClickForward.bind(this)}/>
-      <Circle x={this.props.width/2-10} y={this.props.height/2+50} radius={20} fill={"red"} onClick = {this.mouseClickAnimate.bind(this)}/>
-      <Arrow x={this.props.width/2-5} y={this.props.height/2+50} fill = {"white"}  onClick = {this.mouseClickAnimate.bind(this)}/>
-      <Circle x={this.props.width/2+30} y={this.props.height/2+50} radius={20} fill={"blue"} onClick = {this.mouseClickStop.bind(this)}/>
-      <Rect x={this.props.width/2+25} y={this.props.height/2+45} fill="white" height = {10} width={10} onClick = {this.mouseClickStop.bind(this)}/>
-      <Circle x={this.props.width/2-10} y={this.props.height/2-50} radius={20} fill={"red"} onClick = {this.mouseClickAnimateBackward.bind(this)}/>
-      <Arrow x={this.props.width/2-15} y={this.props.height/2-50} fill = {"white"} rotation={180} onClick = {this.mouseClickAnimateBackward.bind(this)}/>
+      <Rect ref="shape" width = {30} height = {30} x = {this.props.width/2+40} y={this.props.height/2-10} fill={"blue"} onClick = {this.mouseClickForward.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Arrow ref="shape" x={this.props.width/2+60} y={this.props.height/2+5} fill = {"white"}  onClick = {this.mouseClickForward.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Circle ref="shape" x={this.props.width/2-10} y={this.props.height/2+50} radius={20} fill={"red"} onClick = {this.mouseClickAnimate.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Arrow ref="shape" x={this.props.width/2-5} y={this.props.height/2+50} fill = {"white"}  onClick = {this.mouseClickAnimate.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Circle ref="shape" x={this.props.width/2+30} y={this.props.height/2+50} radius={20} fill={"blue"} onClick = {this.mouseClickStop.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Rect ref="shape" x={this.props.width/2+25} y={this.props.height/2+45} fill="white" height = {10} width={10} onClick = {this.mouseClickStop.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Circle ref="shape" x={this.props.width/2-10} y={this.props.height/2-50} radius={20} fill={"red"} onClick = {this.mouseClickAnimateBackward.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
+      <Arrow ref="shape" x={this.props.width/2-15} y={this.props.height/2-50} fill = {"white"} rotation={180} onClick = {this.mouseClickAnimateBackward.bind(this)} onMouseEnter={this.mouseStyle.bind(this)} onMouseLeave={this.changeMouseStyle.bind(this)}/>
       </Group>
     )
   }
