@@ -9,7 +9,7 @@ const mouseStyle =  {
 
 class YearToggle extends React.Component {
 
-  state = { year: this.props.text,interval:3000};
+  state = { year: this.props.text};
 
   mouseClickBackward(){
     let currentYear = this.state.year-1
@@ -35,14 +35,15 @@ class YearToggle extends React.Component {
 
   mouseClickAnimate(){
 
-    setInterval(this.mouseClickForward.bind(this), this.state.interval)
+    let c = setInterval(this.mouseClickForward.bind(this), 30)
+    this.setState({interval:c})
 
   }
 
 
 
   mouseClickStop(){
-    this.setState({interval:0})
+    //this.setState({interval:0})
     clearInterval(this.state.interval)
   }
 
