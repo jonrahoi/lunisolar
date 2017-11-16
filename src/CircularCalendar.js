@@ -48,6 +48,7 @@ class CircularCalendar extends React.Component {
         monthHolidayObjState:monthHolidayObj
       }
     );
+    console.log("got this data from parent", this.props.dataFromSelectCalendar);
   }
 
   handleClick = (updatedYear)=>{
@@ -77,7 +78,7 @@ class CircularCalendar extends React.Component {
 
     let holObj = {}
     holObj = {[spec[key].day]:key}
-    //console.log("what is this that I constructed",holObj);
+    console.log("what is holobj",holObj);
 
     if(holArray!==undefined)
     holArray[spec[key].day] = holObj

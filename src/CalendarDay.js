@@ -59,7 +59,8 @@ class CalendarDay extends React.Component {
         tooltipFont : 20,
         toolTipx : mousePos.x + 5,
         toolTipY : mousePos.y + 5,
-        tooltipText : holidayText
+        tooltipText : holidayText,
+        zIndex:3
       });
 
     }
@@ -86,7 +87,7 @@ class CalendarDay extends React.Component {
       const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
       const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
       return (
-          <Group>
+        <Group>
           <Arc
               ref="arc"
               rotation={this.props.rotation}
@@ -101,8 +102,10 @@ class CalendarDay extends React.Component {
               onMouseLeave = {this.mouseLeave.bind(this)}
             />
             <Text text={this.props.displayDate} x={textX} y={textY} fill={'white'} fontSize={this.props.textFont} />
+            <Text text={this.state.tooltipText} x={this.state.toolTipx} y = {this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
 
-            <Text text={this.state.tooltipText} x={this.state.toolTipx} y = {this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"}/>
+
+
 
           </Group>
       )
