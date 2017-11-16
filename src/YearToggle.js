@@ -40,6 +40,11 @@ class YearToggle extends React.Component {
 
   }
 
+  mouseClickAnimateBackward(){
+    let d = setInterval(this.mouseClickBackward.bind(this), 30)
+    this.setState({interval:d})
+  }
+
 
 
   mouseClickStop(){
@@ -60,6 +65,8 @@ class YearToggle extends React.Component {
       <Arrow x={this.props.width/2-5} y={this.props.height/2+50} fill = {"white"}  onClick = {this.mouseClickAnimate.bind(this)}/>
       <Circle x={this.props.width/2+30} y={this.props.height/2+50} radius={20} fill={"blue"} onClick = {this.mouseClickStop.bind(this)}/>
       <Rect x={this.props.width/2+25} y={this.props.height/2+45} fill="white" height = {10} width={10} onClick = {this.mouseClickStop.bind(this)}/>
+      <Circle x={this.props.width/2-10} y={this.props.height/2-50} radius={20} fill={"red"} onClick = {this.mouseClickAnimateBackward.bind(this)}/>
+      <Arrow x={this.props.width/2-15} y={this.props.height/2-50} fill = {"white"} rotation={180} onClick = {this.mouseClickAnimateBackward.bind(this)}/>
       </Group>
     )
   }
