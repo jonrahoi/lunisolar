@@ -2,6 +2,7 @@ import React from 'react';
 import CalendarMonth from './CalendarMonth'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
+import SelectCalendar from './SelectCalendar'
 import {Stage, Group, Layer, Arc, Text} from 'react-konva';
 const getAllHolidaysForYear = require('./test/calTest.js');
 
@@ -30,6 +31,14 @@ const calendar = {
   "Chinese": "red"
 }
 
+let selectionOfColors = {
+  "yellow" : "deselected",
+  "green" : "deselected",
+  "pink" : "deselected",
+  "violet" : "deselected",
+  "red" : "deselected"
+}
+
 class CircularCalendar extends React.Component {
   static propTypes = {
     height: PropTypes.number.isRequired,
@@ -39,9 +48,7 @@ class CircularCalendar extends React.Component {
   componentWillMount(){
     this.setState(
       {
-        currentYear: this.props.yearText,
-        monthHolidayObjState: Object.assign({}, monthHolidayObj),
-        selectedCalendar: this.props.selectedCalendar
+        currentYear:this.props.yearText
       }
     );
   }
@@ -59,9 +66,9 @@ class CircularCalendar extends React.Component {
 
     Object.keys(spec).map(function(region, index) {
       Object.keys(spec[region]).map((holiday, idx) =>{
-        //console.log(`region is ${region} ; month is ${spec[region][holiday].month} ; day is ${spec[region][holiday].day} ; holiday is ${holiday}`);
+        console.log(`region is ${region} ; month is ${spec[region][holiday].month} ; day is ${spec[region][holiday].day} ; holiday is ${holiday}`);
         const holArray = monthHolidayObj[spec[region][holiday].month]
-console.log("holArray ",holArray);
+
         let holObj = {}
         holObj = {[spec[region][holiday].day]:holiday, holidaycolor: calendar[region]} //assign the holiday to respective day
 
@@ -69,14 +76,6 @@ console.log("holArray ",holArray);
         holArray[spec[region][holiday].day] = holObj //assign the holiday (along with day) to this month
       });
     });
-
-    this.setState(
-      {
-        monthHolidayObjState: Object.assign({}, monthHolidayObj)
-      }
-    )
-
-    console.log(`this.state.monthHolidayObjState[m] is ${this.state.monthHolidayObjState}`);
   }
 
   passFirstDay(m){
@@ -86,10 +85,24 @@ console.log("holArray ",holArray);
     return (startDay)
   }
 
+  colorSelection = (dataFromSelectCalendar) => {
+    console.log(`data from select ${JSON.stringify(dataFromSelectCalendar)}`);
+    Object.assign(selectionOfColors, dataFromSelectCalendar)
+    console.log(`this ${JSON.stringify(selectionOfColors)}`);
+    this.setState({
+      colorSelect : selectionOfColors
+    })
+    console.log(`color selection ${JSON.stringify(this.state.colorSelect)}`);
+  }
+
   render() {
     return (
       <Group>
-
+      {
+        Object.keys(calendar).map((c,idx)=>{
+          return <SelectCalendar width={this.props.width/10} height={this.props.height/10+(idx*40)} calendar={c} calendarColor={calendar[c]} colorSelection={this.colorSelection.bind(this)}/>
+        })
+      }
       {
         months.map((m, idx) => {
           const increment = Math.round(360 / months.length)
@@ -105,7 +118,8 @@ console.log("holArray ",holArray);
           color={color}
           totalAngle={increment}
           startDay={this.passFirstDay(m)}
-          holidayForMonth={this.state.monthHolidayObjState[m]}
+          holidayForMonth={monthHolidayObj[m]}
+          colorSelection={this.state.colorSelect}
           />
         })
       }

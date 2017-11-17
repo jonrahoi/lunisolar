@@ -10,10 +10,10 @@ const style = {
 }
 
 ReactDOM.render(
-  <Stage width={1500} height={800} style={style}>
+  <Stage width={2000} height={1000} style={style}>
   <Layer>
   <Group>
-  <CircularCalendar width={1500} height={800} yearText={2017}/>
+  <CircularCalendar width={2000} height={1000} yearText={2017}/>
   </Group>
   </Layer>
   </Stage>, document.getElementById('root'))
