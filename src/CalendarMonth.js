@@ -45,6 +45,14 @@ class CalendarMonth extends React.Component {
   }
 }
 
+getHolidayName(d,w){
+  let day = this.getDateText(d,w)
+  if(day in this.props.holidayForMonth){
+    const obj = this.props.holidayForMonth[day];this.props.holidayForMonth[day]
+  return obj[day]
+}
+}
+
 
   getColor(d,w){
     let day = this.getDateText(d,w)
@@ -83,6 +91,7 @@ class CalendarMonth extends React.Component {
           myslice={myslice}
           textFont={d+5}
           ishoLiday = {this.getHoliday(d,w)}
+          holidayName = {this.getHolidayName(d,w)}
           holidayForMonth={this.props.holidayForMonth}
           colorSelection={this.props.colorSelection}
           />})
