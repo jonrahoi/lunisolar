@@ -51,6 +51,7 @@ class CircularCalendar extends React.Component {
         currentYear:this.props.yearText
       }
     );
+    console.log("got this data from parent", this.props.dataFromSelectCalendar);
   }
 
   handleClick = (updatedYear)=>{
