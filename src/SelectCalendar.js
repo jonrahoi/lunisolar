@@ -17,18 +17,20 @@ class SelectCalendar extends React.Component {
       }
     ))
     this.setState(function() {
-      this.props.colorSelection({color: this.props.calendarColor, selection: 'deselected'});
+      let color = this.props.calendarColor
+      this.props.colorSelection({[color] : "deselected"});
     });
   }
-    else{
-      this.setState((prevState, props) => ({
-        color: props.calendarColor
-      }
-    ))
-    this.setState(function() {
-      this.props.colorSelection({color: this.props.calendarColor, selection: 'selected'});
-    });
-  }
+  else{
+    this.setState((prevState, props) => ({
+      color: props.calendarColor
+    }
+  ))
+  this.setState(function() {
+    let color = this.props.calendarColor
+    this.props.colorSelection({[color] : "selected"});
+  });
+}
 }
 
 render(){
