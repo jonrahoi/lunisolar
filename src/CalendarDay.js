@@ -25,13 +25,16 @@ class CalendarDay extends React.Component {
     const ctx = this.refs.arc.getContext('2d')
     this.refs.arc.fillEnabled(true)
     this.refs.arc.fill(this.props.color)
+
   }
 
   componentDidMount(){
+
     this.updateCalendar()
   }
 
   componentDidUpdate(){
+
     this.updateCalendar()
   }
 
