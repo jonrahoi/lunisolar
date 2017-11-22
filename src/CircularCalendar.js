@@ -40,24 +40,23 @@ let selectionOfColors = {
 }
 
 class CircularCalendar extends React.Component {
+  state = {
+    colorSelect: selectionOfColors,
+    currentYear: this.props.yearText,
+  }
+
   static propTypes = {
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired
   }
 
   componentWillMount(){
-    this.setState(
-      {
-        currentYear:this.props.yearText
-      }
-    );
-    console.log("got this data from parent", this.props.dataFromSelectCalendar);
+    const spec = getAllHolidaysForYear(this.state.currentYear)
+    this.populateHolidays(spec)
   }
 
   handleClick = (updatedYear)=>{
-    this.setState({currentYear:updatedYear});
-    const spec = getAllHolidaysForYear(updatedYear)
-    this.populateHolidays(spec)
+    this.setState({currentYear: updatedYear});
   };
 
   populateHolidays(spec){

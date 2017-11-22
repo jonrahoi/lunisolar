@@ -8,7 +8,7 @@ const mouseStyle =  {
 
 class SelectCalendar extends React.Component {
 
-  state = {color: 'white'};
+  state = {color: 'white'}
 
   changeColor(calendarColor){
     if(this.state.color == this.props.calendarColor){

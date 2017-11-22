@@ -33,26 +33,24 @@ class CalendarMonth extends React.Component {
     if(displayDate<1 || displayDate> 31)
     return ""
     return (displayDate)
-
   }
 
   getHoliday(d,w){
-  const dd = this.getDateText(d,w)
-  if(dd in this.props.holidayForMonth){
-    return 1
-  } else {
-    return 0
+    const dd = this.getDateText(d,w)
+    if(dd in this.props.holidayForMonth){
+      return 1
+    } else {
+      return 0
+    }
   }
-}
 
-getHolidayName(d,w){
-  let day = this.getDateText(d,w)
-  if(day in this.props.holidayForMonth){
-    const obj = this.props.holidayForMonth[day];this.props.holidayForMonth[day]
-  return obj[day]
-}
-}
-
+  getHolidayName(d,w){
+    let day = this.getDateText(d,w)
+    if(day in this.props.holidayForMonth){
+      const obj = this.props.holidayForMonth[day];this.props.holidayForMonth[day]
+      return obj[day]
+    }
+  }
 
   getColor(d,w){
     let day = this.getDateText(d,w)
