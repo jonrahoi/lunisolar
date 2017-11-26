@@ -8,8 +8,6 @@ const getAllHolidaysForYear = require('./test/calTest.js');
 
 const months = [1,2,3,4,5,6,7,8,9,10,11,12]
 
-const days = []
-
 let monthHolidayObj = {
   1:{},
   2:{},
@@ -42,12 +40,6 @@ let selectionOfColors = {
 }
 
 class CircularCalendar extends React.Component {
-  constructor () {
-    super()
-    for (let x = 1; x<= 366; x++){
-      days.push(x)
-    }
-  }
   state = {
     colorSelect: selectionOfColors,
     currentYear: this.props.yearText,
@@ -112,17 +104,20 @@ class CircularCalendar extends React.Component {
         })
       }
       {
-        days.map((getDay, idx) => {
-          const increment = Math.round(360 / days.length)
+        months.map((m, idx) => {
+          const increment = Math.round(360 / months.length)
           let color = "#909090"
           if(idx%2 == 0) color = "#303030"
-          return <CalendarDay
-          key={d}
+          return <CalendarMonth
+          key={m}
+          month={m}
+          numMonths={months.length}
           rotation={increment*idx}
           width={this.props.width}
           height={this.props.height}
           color={color}
           totalAngle={increment}
+          startDay={this.passFirstDay(m)}
           holidayForMonth={monthHolidayObj[m]}
           colorSelection={this.state.colorSelect}
           />
