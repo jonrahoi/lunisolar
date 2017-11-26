@@ -33,7 +33,7 @@ class CalendarMonth extends React.Component {
     if(displayDate<1)
     return ""
     if(displayDate>30){
-      if( this.props.month===2 || this.props.month===4 || this.props.month===6 || this.props.month===9  || this.props.month===11){
+      if(this.props.month===4 || this.props.month===6 || this.props.month===9  || this.props.month===11){
         return ""
         }
       }
@@ -44,11 +44,13 @@ class CalendarMonth extends React.Component {
 
       } if(this.props.month===2){
         if(displayDate>28) {
-          //console.log("this",displayDate);
           if((this.props.year%4===0) && (this.props.year%100!==0) || (this.props.year%400===0)){
             console.log("year is leap");
+            if(displayDate>29){
+              return ""
+            }
             return displayDate
-          } else {
+          } else if(displayDate>28) {
             return ""
           }
         }
