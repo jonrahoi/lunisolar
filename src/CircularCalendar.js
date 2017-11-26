@@ -112,7 +112,8 @@ class CircularCalendar extends React.Component {
         })
       }
       {
-        days.map((getDay, idx) => {
+        days.map((d, idx) => {
+          const dateForToday = moment().year(this.state.currentYear).dayOfYear(d);
           const increment = Math.round(360 / days.length)
           let color = "#909090"
           if(idx%2 == 0) color = "#303030"
