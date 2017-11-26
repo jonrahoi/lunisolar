@@ -120,6 +120,7 @@ class CircularCalendar extends React.Component {
           startDay={this.passFirstDay(m)}
           holidayForMonth={monthHolidayObj[m]}
           colorSelection={this.state.colorSelect}
+          year = {this.state.currentYear}
           />
         })
       }
