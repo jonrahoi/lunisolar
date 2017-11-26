@@ -44,9 +44,9 @@ class CalendarMonth extends React.Component {
 
       } if(this.props.month===2){
         if(displayDate>28) {
-          console.log("this",displayDate);
-          if((this.props.year%4===0) && (this.props.year%100!==0) && (this.props.year%400===0)){
-            console.log("Went here and date is",displayDate);
+          //console.log("this",displayDate);
+          if((this.props.year%4===0) && (this.props.year%100!==0) || (this.props.year%400===0)){
+            console.log("year is leap");
             return displayDate
           } else {
             return ""
