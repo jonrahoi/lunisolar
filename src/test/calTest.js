@@ -18,7 +18,8 @@ const getAllHolidaysForYear = (year, options) => {
           "epiphany" : jsCal.gregorian_from_fixed(jsCal.epiphany(year)),
           "independence_day" : jsCal.gregorian_from_fixed(jsCal.independence_day(year)),
           "easter" : jsCal.gregorian_from_fixed(jsCal.easter(year)),
-          "christmas" : jsCal.gregorian_from_fixed(jsCal.christmas(year))
+          "christmas" : jsCal.gregorian_from_fixed(jsCal.christmas(year)),
+          "advent" : jsCal.gregorian_from_fixed(jsCal.advent(year))
         },
         "Hindu": {
           "diwali" : jsCal.gregorian_from_fixed(jsCal.diwali(year))
@@ -30,8 +31,7 @@ const getAllHolidaysForYear = (year, options) => {
         },
         "Hebrew": {
           "yom_kippur" : jsCal.gregorian_from_fixed(jsCal.yom_kippur(year)),
-          "passover" : jsCal.gregorian_from_fixed(jsCal.passover(year)),
-          "advent" : jsCal.gregorian_from_fixed(jsCal.advent(year))
+          "passover" : jsCal.gregorian_from_fixed(jsCal.passover(year))
         },
         "Chinese": {
           "chinese_new_year" : jsCal.gregorian_from_fixed(jsCal.chinese_new_year(year)),
