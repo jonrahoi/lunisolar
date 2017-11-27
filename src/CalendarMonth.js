@@ -31,44 +31,33 @@ class CalendarMonth extends React.Component {
 
   getDateText(d,w){
     const dayN = d+(7*(w-1));
-    const displayDate = dayN - ((this.props.startDay+1) - 1);
-    if(displayDate<1)
-    return ""
-    if(displayDate>30){
-      if(this.props.month===4 || this.props.month===6 || this.props.month===9  || this.props.month===11){
-        return ""
-      }
-    }
-    if( this.props.month===1 || this.props.month===3 || this.props.month===5 || this.props.month===7|| this.props.month===8 || this.props.month===10 || this.props.month===12){
-      if(displayDate>31){
-        return ""
-      } return displayDate
+   const displayDate = dayN - ((this.props.startDay+1) - 1);
+   if(displayDate<1)
+   return ""
+   if(displayDate>30){
+     if(this.props.month===4 || this.props.month===6 || this.props.month===9  || this.props.month===11){
+       return ""
+       }
+     }
+     if( this.props.month===1 || this.props.month===3 || this.props.month===5 || this.props.month===7|| this.props.month===8 || this.props.month===10 || this.props.month===12){
+       if(displayDate>31){
+         return ""
+       } return displayDate
 
-    } if(this.props.month===2){
-      if(displayDate>28) {
-        if((this.props.year%4===0) && (this.props.year%100!==0) && (this.props.year%400===0)){
-          console.log("Went here and date is",displayDate);
-          return displayDate
-        } else {
-          return ""
-        } return displayDate
+     } if(this.props.month===2){
+       if(displayDate>28) {
+         if((this.props.year%4===0) && (this.props.year%100!==0) || (this.props.year%400===0)){
+           console.log("year is leap");
+           if(displayDate>29){
+             return ""
+           }
+           return displayDate
+         } else if(displayDate>28) {
+           return ""
+         }
+       }
 
-      } if(this.props.month===2){
-        if(displayDate>28) {
-          if((this.props.year%4===0) && (this.props.year%100!==0) || (this.props.year%400===0)){
-            console.log("year is leap");
-            if(displayDate>29){
-              return ""
-            }
-            return displayDate
-          } else if(displayDate>28) {
-            return ""
-          }
-
-        }
-      }
-
-    } return displayDate
+   } return displayDate
   }
 
 
