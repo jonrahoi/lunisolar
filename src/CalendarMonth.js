@@ -25,7 +25,9 @@ class CalendarMonth extends React.Component {
   constructor(props){
     super(props)
     this.setState({ishoLiday:0})
+
   }
+
 
   getDateText(d,w){
     const dayN = d+(7*(w-1));
@@ -35,23 +37,22 @@ class CalendarMonth extends React.Component {
     if(displayDate>30){
       if( this.props.month===2 || this.props.month===4 || this.props.month===6 || this.props.month===9  || this.props.month===11){
         return ""
+      }
+    }
+    if( this.props.month===1 || this.props.month===3 || this.props.month===5 || this.props.month===7|| this.props.month===8 || this.props.month===10 || this.props.month===12){
+      if(displayDate>31){
+        return ""
+      } return displayDate
+
+    } if(this.props.month===2){
+      if(displayDate>28) {
+        if((this.props.year%4===0) && (this.props.year%100!==0) && (this.props.year%400===0)){
+          console.log("Went here and date is",displayDate);
+          return displayDate
+        } else {
+          return ""
         }
       }
-      if( this.props.month===1 || this.props.month===3 || this.props.month===5 || this.props.month===7|| this.props.month===8 || this.props.month===10 || this.props.month===12){
-        if(displayDate>31){
-          return ""
-        } return displayDate
-
-      } if(this.props.month===2){
-        if(displayDate>28) {
-          console.log("this",displayDate);
-          if((this.props.year%4===0) && (this.props.year%100!==0) && (this.props.year%400===0)){
-            console.log("Went here and date is",displayDate);
-            return displayDate
-          } else {
-            return ""
-          }
-        }
 
     } return displayDate
   }
@@ -87,13 +88,18 @@ class CalendarMonth extends React.Component {
 
   render() {
     const myslice = this.props.totalAngle / weeks.length
+    //console.log(`total angle is ${this.props.totalAngle} my slice is ${myslice}`);
     const numdays = weeks.map((w,midx) => {
       const rot = this.props.rotation + (myslice * w)  //30+(30*1)
+      console.log(`month : ${this.props.month}; rotation is ${this.props.rotation}; angle for week ${w} is ${rot}`);
       return(
         <Group>
         { daysOfWeek.map((d, idx) => {
+
           const inner = 200 + (30 * idx)
-          const day = (this.props.month-1) * 28 + (w*d);
+          const day = (this.props.month-1) * 28 + (w*d)
+          if(this.getDateText(d,w)!=""){
+
           return <CalendarDay
           height={this.props.height}
           width={this.props.width}
@@ -115,7 +121,11 @@ class CalendarMonth extends React.Component {
           holidayName = {this.getHolidayName(d,w)}
           holidayForMonth={this.props.holidayForMonth}
           colorSelection={this.props.colorSelection}
-          />})
+          />}
+/*else{
+  console.log(`month is ${this.props.month} ;outer is ${inner+30}`);
+}*/
+        })
         }
         </Group>
       )

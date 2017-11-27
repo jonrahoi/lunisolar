@@ -29,13 +29,21 @@ class CalendarDay extends React.Component {
   }
 
   componentDidMount(){
-
+//if(this.props.displayDate!=""){
     this.updateCalendar()
+  //}
   }
 
   componentDidUpdate(){
-
+//if(this.props.displayDate!=""){
     this.updateCalendar()
+//}
+  }
+
+  displayDateCheck(){
+    if(this.props.displayDate===""){
+      console.log(`display date is empty`);
+    }
   }
 
   hover(){
@@ -79,8 +87,9 @@ class CalendarDay extends React.Component {
     const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
     const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
     return (
+
       <Group>
-      <Arc
+    <Arc
       ref="arc"
       rotation={this.props.rotation}
       x={this.props.width/2}
