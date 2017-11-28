@@ -5,6 +5,7 @@
   "dependencies": {
     "color": "^2.0.0",
     "konva": "^1.7.0",
+    "moment": "^2.19.2",
     "nopt": "^4.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
