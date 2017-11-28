@@ -1,40 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {Stage, Layer, Arc, Text, Group} from 'react-konva';
+import {Stage, Layer, Arc, Text, Group} from 'react-konva'
 
 class CalendarDay extends React.Component {
 
   constructor(props){
     super(props)
-       this.state = { isMouseInside: false}
-
+    this.state = { isMouseInside: false}
   }
 
   static propTypes = {
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
-    numMonths: PropTypes.number.isRequired,
-    dayNum: PropTypes.number.isRequired,
-    color: PropTypes.string.isRequired,
-    weeks: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    textFont: PropTypes.number.isRequired
+    numWeeks: PropTypes.number.isRequired,
+    totalAngle: PropTypes.number.isRequired,
+    week: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+    textFont: PropTypes.number.isRequired,
+    daysOfYear: PropTypes.object.isRequired
   }
 
   updateCalendar(){
     const ctx = this.refs.arc.getContext('2d')
     this.refs.arc.fillEnabled(true)
-    this.refs.arc.fill(this.props.color)
+    this.refs.arc.fill("grey")
 
   }
 
   componentDidMount(){
-
     this.updateCalendar()
   }
 
   componentDidUpdate(){
-
     this.updateCalendar()
   }
 
@@ -75,25 +72,28 @@ class CalendarDay extends React.Component {
   */
   render() {
     const p = this.props
-    const angle = 360 / (p.numMonths * p.weeks)
-    const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
-    const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin((p.rotation+(this.props.myslice/2)) * (Math.PI / 180))
+
+    const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos(p.rotation * (Math.PI / 180))
+
+    const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin(p.rotation * (Math.PI / 180))
+
+    const day = this.props.daysOfYear[this.props.day]
+    console.log(day)
+
     return (
       <Group>
-      <Arc
+    <Arc
       ref="arc"
       rotation={this.props.rotation}
       x={this.props.width/2}
       y={this.props.height/2}
       innerRadius={this.props.innerRadius}
       outerRadius={this.props.outerRadius}
-      //opacity={1}
-      angle={angle}
-      //color={this.props.color}
+      angle={this.props.totalAngle}
       onMouseEnter = {this.hover.bind(this)}
       onMouseLeave = {this.mouseLeave.bind(this)}
       />
-      <Text text={this.props.displayDate} x={textX} y={textY} fill={'white'} fontSize={10} />
+      <Text text={1} x={textX} y={textY} fill={'white'} fontSize={10} />
       <Text ref = "text" text={this.state.tooltipText} x={this.state.toolTipx} y = {this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
 
       </Group>
