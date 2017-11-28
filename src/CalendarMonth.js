@@ -8,15 +8,11 @@ import MonthName from './MonthName'
 const weeks = [1,2,3,4,5,6]
 const daysOfWeek  = [1,2,3,4,5,6,7]
 
-// this.props.totalAngle = the size of the slice of the pie
-
-
-const getColor = (dayNum) => {
+/*const getColor = (dayNum) => {
   const color = Color(`hsl(${dayNum}, 100%, 50%)`)
   const [r, g, b] = color.rgb().array()
-  // console.log(`${r}-${g}-${b} COLOR=${color}`)
   return color.hex()
-}
+}*/
 
 const startDay = new Date('1/1/2019')
 
@@ -28,29 +24,24 @@ class CalendarMonth extends React.Component {
     color: PropTypes.string.isRequired,
     rotation: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
-    numMonths : PropTypes.number.isRequired
+    numMonths : PropTypes.number.isRequired,
+    selection : PropTypes.string.isRequired
   }
 
-constructor(props){
-  super(props)
-  this.setState({ishoLiday:0})
-}
-
-
-
+  constructor(props){
+    super(props)
+    this.setState({ishoLiday:0})
+  }
 
   getDateText(d,w){
     const dayN = d+(7*(w-1));
     const displayDate = dayN - ((this.props.startDay+1) - 1);
     if(displayDate<1 || displayDate> 31)
     return ""
-    if(displayDate in this.props.holidayForMonth)
-    console.log("today is a holiday",this.props.holidayForMonth[displayDate]);
-    //this.setState({ishoLiday:1})
     return (displayDate)
-
   }
 
+<<<<<<< HEAD
 
 getHoliday(d,w){
   const dd = this.getDateText(d,w)
@@ -61,12 +52,13 @@ getHoliday(d,w){
   }
 }
 
+=======
+>>>>>>> 487a4bda2771661f3d4c00c43a0eea9cf52e967e
   render() {
     const myslice = this.props.totalAngle / weeks.length
-    // console.log(`MYSLICE = ${myslice}`)
-
     const numdays = weeks.map((w,midx) => {
       const rot = this.props.rotation + (myslice * w)  //30+(30*1)
+        console.log(`holiday for month ${this.props.holidayForMonth}`);
       return(
         <Group>
         { daysOfWeek.map((d, idx) => {
@@ -86,23 +78,19 @@ getHoliday(d,w){
           rotation={rot}
           innerRadius={inner}
           outerRadius={inner+30}
-          //color={getColor(day*2)}
           color={this.props.color}
           myslice={myslice}
           textFont={d+5}
-          ishoLiday = {this.getHoliday(d,w)}
           holidayForMonth={this.props.holidayForMonth}/>})
         }
         </Group>
       )
-
     }
   )
   return(
     <Group>
     {numdays}
-    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {380} height={this.props.height}
-    width={this.props.width}/>
+    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {380} height={this.props.height} width={this.props.width}/>
     </Group>
   )
 }

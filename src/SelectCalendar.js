@@ -8,7 +8,7 @@ const mouseStyle =  {
 
 class SelectCalendar extends React.Component {
 
-  state = {color: 'white'};
+  state = {color: this.props.calendarColor};
 
   changeColor(calendarColor){
     if(this.state.color == this.props.calendarColor){
@@ -20,15 +20,15 @@ class SelectCalendar extends React.Component {
       this.props.colorSelection({color: this.props.calendarColor, selection: 'deselected'});
     });
   }
-    else{
-      this.setState((prevState, props) => ({
-        color: props.calendarColor
-      }
-    ))
-    this.setState(function() {
-      this.props.colorSelection({color: this.props.calendarColor, selection: 'selected'});
-    });
-  }
+  else{
+    this.setState((prevState, props) => ({
+      color: this.props.calendarColor
+    }
+  ))
+  this.setState(function() {
+    this.props.colorSelection({color: this.props.calendarColor, selection: 'selected'});
+  });
+}
 }
 
 render(){
