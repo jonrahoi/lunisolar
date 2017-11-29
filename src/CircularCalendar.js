@@ -23,17 +23,17 @@ const calendar = {
   "Chinese": "red"
 }
 
-let selectionOfColors = {
-  "yellow" : "deselected",
-  "green" : "deselected",
-  "pink" : "deselected",
-  "violet" : "deselected",
-  "red" : "deselected"
+let selectionOfCalendars = {
+  "Roman" : "deselected",
+  "Hindu" : "deselected",
+  "Islamic" : "deselected",
+  "Hebrew" : "deselected",
+  "Chinese" : "deselected"
 }
 
 class CircularCalendar extends React.Component {
   state = {
-    colorSelect: selectionOfColors,
+    calendarSelect: selectionOfCalendars,
     currentYear: this.props.yearText,
   }
 
@@ -51,14 +51,11 @@ class CircularCalendar extends React.Component {
     this.setState({currentYear: updatedYear});
   };
 
-  colorSelection = (dataFromSelectCalendar) => {
-    console.log(`data from select ${JSON.stringify(dataFromSelectCalendar)}`);
-    Object.assign(selectionOfColors, dataFromSelectCalendar)
-    console.log(`this ${JSON.stringify(selectionOfColors)}`);
+  calendarSelection = (dataFromSelectCalendar) => {
+    Object.assign(selectionOfCalendars, dataFromSelectCalendar)
     this.setState({
-      colorSelect : selectionOfColors
+      calendarSelect : selectionOfCalendars
     })
-    console.log(`color selection ${JSON.stringify(this.state.colorSelect)}`);
   }
 
   render() {
@@ -66,7 +63,12 @@ class CircularCalendar extends React.Component {
       <Group>
       {
         Object.keys(calendar).map((c,idx)=>{
-          return <SelectCalendar width={this.props.width/10} height={this.props.height/10+(idx*40)} calendar={c} calendarColor={calendar[c]} colorSelection={this.colorSelection.bind(this)}/>
+          return <SelectCalendar
+          width={this.props.width/10}
+          height={this.props.height/10+(idx*40)}
+          calendar={c}
+          calendarColor={calendar[c]}
+          calendarSelection={this.calendarSelection.bind(this)}/>
         })
       }
       {
@@ -82,6 +84,8 @@ class CircularCalendar extends React.Component {
           colorSelection={this.state.colorSelect}
           year={this.state.currentYear}
           daysOfYear={daysofyear}
+          calendar={calendar}
+          calendarSelection={this.state.calendarSelect}
           />
         })
       }

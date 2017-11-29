@@ -74,7 +74,8 @@ class CalendarWeek extends React.Component {
       outerRadius={inner+30}
       textFont={d+5}
       daysOfYear={this.props.daysOfYear}
-      colorSelection={this.props.colorSelection}
+      calendar={this.props.calendar}
+      calendarSelection={this.props.calendarSelection}
       />
     })
     return(

@@ -104,7 +104,7 @@ const getAllHolidaysForYear = (year, options) => {
 
   const numDays = moment([year]).isLeapYear() ? 366 : 365
 
-  for (let x=1; x<=numDays; x++){
+  for (let x=0; x<numDays; x++){
     const d = moment([year]).dayOfYear(x)
     days.push({
       day: x,
