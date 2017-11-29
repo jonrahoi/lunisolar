@@ -3,6 +3,7 @@ import {Stage, Group, Layer, Arc, Text} from 'react-konva';
 import PropTypes from 'prop-types'
 import * as Color from 'color'
 import CalendarDay from './CalendarDay';
+const moment = require('moment')
 
 const daysOfWeek  = [1,2,3,4,5,6,7]
 
@@ -53,15 +54,16 @@ class CalendarWeek extends React.Component {
   }
 
   dateFromDay(day){
-let date = new Date(this.props.year, 0); // initialize a date in `year-01-01`
-let actualDate = new Date(date.setDate(day)); // add the number of days
-return actualDate.getDate()
+
+let date = moment([this.props.year]).dayOfYear(day).date()
+//console.log(date);
+return date
 }
 
   getMonthName(day){
-    let date = new Date(this.props.year, 0); // initialize a date in `year-01-01`
-    let actualDate = new Date(date.setDate(day)); // add the number of days
-    return (actualDate.getMonth()+1)
+    let month = moment([this.props.year]).dayOfYear(day).month()
+    console.log(month+1);
+    return (month+1)
   }
 
   render() {
@@ -89,6 +91,7 @@ return actualDate.getDate()
       calendar={this.props.calendar}
       calendarSelection={this.props.calendarSelection}
       dateText = {this.dateFromDay(day)}
+      monthName = {this.getMonthName(day)}
       />
     })
     return(
