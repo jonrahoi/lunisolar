@@ -68,34 +68,34 @@ return actualDate.getDate()
 
     const numdays = daysOfWeek.map((d, idx) => {
 
-          const inner = 200 + (30 * idx)
-          // current day of the year
-          const day = this.props.week * 7 + d
+      const inner = 200 + (30 * idx)
+      // current day of the year
+      const day = this.props.week * 7 + d
 
-          return <CalendarDay
-          height={this.props.height}
-          width={this.props.width}
-          week={this.props.week}
-          numWeeks={this.props.numWeeks}
-          totalAngle={this.props.totalAngle}
-          year={this.props.year}
-          day={day}
-          key={day}
-          rotation={this.props.rotation}
-          innerRadius={inner}
-          outerRadius={inner+30}
-          textFont={d+5}
-          daysOfYear={this.props.daysOfYear}
-          colorSelection={this.props.colorSelection}
-          dateText = {this.dateFromDay(day)}
-          month = {this.getMonthName(day)}
-          />
-        })
-  return(
-    <Group>
-    {numdays}
-    </Group>
-  )
-}
+      return <CalendarDay
+      height={this.props.height}
+      width={this.props.width}
+      week={this.props.week}
+      numWeeks={this.props.numWeeks}
+      totalAngle={this.props.totalAngle}
+      year={this.props.year}
+      day={day}
+      key={day}
+      rotation={this.props.rotation}
+      innerRadius={inner}
+      outerRadius={inner+30}
+      textFont={d+5}
+      daysOfYear={this.props.daysOfYear}
+      calendar={this.props.calendar}
+      calendarSelection={this.props.calendarSelection}
+      dateText = {this.dateFromDay(day)}
+      />
+    })
+    return(
+      <Group>
+      {numdays}
+      </Group>
+    )
+  }
 }
 export default CalendarWeek;

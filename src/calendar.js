@@ -3,10 +3,10 @@ const nopt = require('nopt')
 const moment = require('moment')
 
 const knownOpts = {
-    year : Number
+  year : Number
 }
 const shortHands = {
-    y : ['--year']
+  y : ['--year']
 }
 const cli = nopt(knownOpts, shortHands, process.argv, 2)
 
@@ -98,39 +98,40 @@ const holidays = {
 }
 
 const getAllHolidaysForYear = (year, options) => {
-    const days = []
-    const thisYear = moment([year])
-    console.log(year, moment([year]))
+  const days = []
+  const thisYear = moment([year])
+  //console.log(year, moment([year]))
 
-    const numDays = moment([year]).isLeapYear() ? 366 : 365
+  const numDays = moment([year]).isLeapYear() ? 366 : 365
 
-    for (let x=0; x< numDays; x++){
-      const d = moment([year]).dayOfYear(x)
-      days.push({
-        day : x,
-        holidays: [],
-        month: d.month()
-      })
-    }
-    
-    Object.keys(holidays).map(name => {
-      const h = holidays[name](year)
-      // h.date, h.calendar, h.name
-      h.name = name
-      console.log(h)
-      const date = moment(`${h.date.month}-${h.date.day}-${h.date.year}`, 'M-D-YYYY')
-      const dayOfYear = date.dayOfYear()
-      console.log(`${h.name} ${date} ${dayOfYear}`)
-      const day = days[dayOfYear]
-      if (day){
-        day.holidays.push(h)
-      }else{
-        console.log(`${dayOfYear} dayOfYear not found!!`)
-      }
-      
+  for (let x=0; x<numDays; x++){
+    const d = moment([year]).dayOfYear(x)
+    days.push({
+      day: x,
+      date: d.date(),
+      holidays: [],
+      month: d.month()+1
     })
+  }
 
-    return days
+  Object.keys(holidays).map(name => {
+    const h = holidays[name](year)
+    // h.date, h.calendar, h.name
+    h.name = name
+    //console.log(h)
+    const date = moment(`${h.date.month}-${h.date.day}-${h.date.year}`, 'M-D-YYYY')
+    const dayOfYear = date.dayOfYear()
+    //console.log(`${h.name} ${date} ${dayOfYear}`)
+    const day = days[dayOfYear]
+    if (day){
+      day.holidays.push(h)
+    }else{
+      console.log(`${dayOfYear} dayOfYear not found!!`)
+    }
+
+  })
+
+  return days
 }
 
 // console.log(getAllHolidaysForYear(cli.year))
