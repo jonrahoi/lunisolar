@@ -57,11 +57,13 @@ mouseLeave(){
 render() {
   const p = this.props
 
-  const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos(p.rotation * (Math.PI / 180))
+  const textX = p.width/2 + (p.innerRadius + 12) * Math.cos((p.rotation + 2.5) * (Math.PI / 180))
 
-  const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin(p.rotation * (Math.PI / 180))
-
-  let color = "grey"
+  const textY = p.height/2 + (p.innerRadius + 12) * Math.sin((p.rotation + 2.5) * (Math.PI / 180))
+  let color
+  if(this.props.day===1)
+  color = "red"
+  else color = "grey"
   let day = 1
   if(this.props.daysOfYear[this.props.day]!==undefined){
     day=this.props.daysOfYear[this.props.day]
@@ -87,7 +89,7 @@ render() {
     />
 
     <Text
-    text={day.date}
+    text={this.props.dateText}
     x={textX}
     y={textY}
     fill={'white'}

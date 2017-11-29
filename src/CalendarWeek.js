@@ -52,6 +52,18 @@ class CalendarWeek extends React.Component {
     }
   }
 
+  dateFromDay(day){
+let date = new Date(this.props.year, 0); // initialize a date in `year-01-01`
+let actualDate = new Date(date.setDate(day)); // add the number of days
+return actualDate.getDate()
+}
+
+  getMonthName(day){
+    let date = new Date(this.props.year, 0); // initialize a date in `year-01-01`
+    let actualDate = new Date(date.setDate(day)); // add the number of days
+    return (actualDate.getMonth()+1)
+  }
+
   render() {
 
     const numdays = daysOfWeek.map((d, idx) => {
@@ -76,6 +88,7 @@ class CalendarWeek extends React.Component {
       daysOfYear={this.props.daysOfYear}
       calendar={this.props.calendar}
       calendarSelection={this.props.calendarSelection}
+      dateText = {this.dateFromDay(day)}
       />
     })
     return(
