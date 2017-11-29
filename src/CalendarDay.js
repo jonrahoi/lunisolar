@@ -36,35 +36,35 @@ class CalendarDay extends React.Component {
   }
 
   hover(){
-       let mousePos = this.refs.arc.getStage().getPointerPosition();
-       let holidayText = ""
-       let rect = this.refs.text.shadowColor("grey")
-       this.refs.text.shadowOpacity(0.5)
-      //console.log("rect ",rect);
-       if(this.props.ishoLiday===1){
-         holidayText = this.props.holidayName
-       }
-      this.setState({
-        isMouseInside: true,
-        tooltipFont : 20,
-        toolTipx : mousePos.x + 5,
-        toolTipY : mousePos.y + 5,
-        tooltipText : holidayText,
-        zIndex:3
-      });
-
+    let mousePos = this.refs.arc.getStage().getPointerPosition();
+    let holidayText = ""
+    let rect = this.refs.text.shadowColor("grey")
+    this.refs.text.shadowOpacity(0.5)
+    //console.log("rect ",rect);
+    if(this.props.ishoLiday===1){
+      holidayText = this.props.holidayName
     }
+    this.setState({
+      isMouseInside: true,
+      tooltipFont : 20,
+      toolTipx : mousePos.x + 5,
+      toolTipY : mousePos.y + 5,
+      tooltipText : holidayText,
+      zIndex:3
+    });
 
-    mouseLeave(){
-      this.setState({
-        isMouseInside: false,
-        tooltipFont : 0,
-        toolTipx : 0,
-        toolTipY : 0,
-        tooltipText : ""
-      });
+  }
 
-    }
+  mouseLeave(){
+    this.setState({
+      isMouseInside: false,
+      tooltipFont : 0,
+      toolTipx : 0,
+      toolTipY : 0,
+      tooltipText : ""
+    });
+
+  }
 
   /**
   * start at x, y
@@ -77,12 +77,14 @@ class CalendarDay extends React.Component {
 
     const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin(p.rotation * (Math.PI / 180))
 
-    const day = this.props.daysOfYear[this.props.day]
-    console.log(day)
-
+    let day = 1
+    if(this.props.daysOfYear[this.props.day]!==undefined){
+      day=this.props.daysOfYear[this.props.day]
+      //console.log(` actual day in month is ${dayInMonth}`);
+    }
     return (
       <Group>
-    <Arc
+      <Arc
       ref="arc"
       rotation={this.props.rotation}
       x={this.props.width/2}
@@ -90,11 +92,11 @@ class CalendarDay extends React.Component {
       innerRadius={this.props.innerRadius}
       outerRadius={this.props.outerRadius}
       angle={this.props.totalAngle}
-      onMouseEnter = {this.hover.bind(this)}
-      onMouseLeave = {this.mouseLeave.bind(this)}
+      onMouseEnter={this.hover.bind(this)}
+      onMouseLeave={this.mouseLeave.bind(this)}
       />
-      <Text text={1} x={textX} y={textY} fill={'white'} fontSize={10} />
-      <Text ref = "text" text={this.state.tooltipText} x={this.state.toolTipx} y = {this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
+      <Text text={day.date} x={textX} y={textY} fill={'white'} fontSize={10} />
+      <Text ref="text" text={this.state.tooltipText} x={this.state.toolTipx} y={this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
 
       </Group>
     )
