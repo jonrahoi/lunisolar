@@ -44,11 +44,11 @@ class CircularCalendar extends React.Component {
 
   constructor (props){
     super(props)
-    daysofyear = getAllHolidaysForYear(this.props.yearText) 
+    daysofyear = getAllHolidaysForYear(this.props.yearText)
   }
 
   componentWillMount(){
-    
+
   }
 
   handleClick = (updatedYear)=>{
@@ -75,11 +75,11 @@ class CircularCalendar extends React.Component {
       }
       {
         weeks.map((w, idx) => {
-          
+
           return <CalendarWeek
           key={w}
           numWeeks={weeks.length}
-          rotation={totalAngle*idx}
+          rotation={totalAngle*idx+265}
           width={this.props.width}
           week={w}
           height={this.props.height}

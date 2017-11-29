@@ -23,7 +23,11 @@ class CalendarDay extends React.Component {
   updateCalendar(){
     const ctx = this.refs.arc.getContext('2d')
     this.refs.arc.fillEnabled(true)
-    this.refs.arc.fill("grey")
+    if(this.props.month%2===0){
+      this.refs.arc.fill("#303030")
+    } else {
+      this.refs.arc.fill("#909090")
+    }
 
   }
 
@@ -66,6 +70,8 @@ class CalendarDay extends React.Component {
 
     }
 
+
+
   /**
   * start at x, y
   * go via angle, plus inner radius
@@ -73,13 +79,12 @@ class CalendarDay extends React.Component {
   render() {
     const p = this.props
 
-    const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos(p.rotation * (Math.PI / 180))
+    const textX = p.width/2 + (p.innerRadius + 12) * Math.cos((p.rotation +2.5) * (Math.PI / 180))
 
-    const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin(p.rotation * (Math.PI / 180))
+    const textY = p.height/2 + (p.innerRadius + 12) * Math.sin((p.rotation +2.5) * (Math.PI / 180))
 
     const day = this.props.daysOfYear[this.props.day]
     console.log(day)
-
     return (
       <Group>
     <Arc
@@ -93,7 +98,7 @@ class CalendarDay extends React.Component {
       onMouseEnter = {this.hover.bind(this)}
       onMouseLeave = {this.mouseLeave.bind(this)}
       />
-      <Text text={1} x={textX} y={textY} fill={'white'} fontSize={10} />
+      <Text text={this.props.dateText} x={textX} y={textY} fill={'white'} fontSize={10} />
       <Text ref = "text" text={this.state.tooltipText} x={this.state.toolTipx} y = {this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
 
       </Group>
