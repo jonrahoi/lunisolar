@@ -6,6 +6,8 @@ import CalendarDay from './CalendarDay';
 const moment = require('moment')
 
 const daysOfWeek  = [1,2,3,4,5,6,7]
+const nameOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+const nameOfMonth = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
 
 class CalendarWeek extends React.Component {
   static propTypes = {
@@ -54,14 +56,22 @@ class CalendarWeek extends React.Component {
 
   dateFromDay(day){
 
-    let date = moment([this.props.year]).dayOfYear(day).date()
-    //console.log(date);
-    return date
-  }
+let date = moment([this.props.year]).dayOfYear(day).date()
+return date
+}
 
   getMonthName(day){
     let month = moment([this.props.year]).dayOfYear(day).month()
-    console.log(month+1);
+    return (nameOfMonth[month])
+  }
+
+  getDayName(day){
+    let dayName = moment([this.props.year]).dayOfYear(day).day()
+    return (nameOfWeek[dayName])
+  }
+
+  getMonthNumber(day){
+    let month = moment([this.props.year]).dayOfYear(day).month()
     return (month+1)
   }
 
@@ -91,6 +101,8 @@ class CalendarWeek extends React.Component {
       calendarSelection={this.props.calendarSelection}
       dateText = {this.dateFromDay(day)}
       monthName = {this.getMonthName(day)}
+      dayName = {this.getDayName(day)}
+      monthNumber = {this.getMonthNumber(day)}
       />
     })
     return(

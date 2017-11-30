@@ -23,23 +23,30 @@ class CalendarDay extends React.Component {
   hover(){
     let mousePos = this.refs.arc.getStage().getPointerPosition();
     let holidayText = ""
-    let rect = this.refs.text.shadowColor("grey")
-    this.refs.text.shadowOpacity(0.5)
-    if(this.props.ishoLiday===1){
-      holidayText = this.props.holidayName
+    let anotherDay
+    if(this.props.daysOfYear[this.props.day]!==undefined){
+      anotherDay=this.props.daysOfYear[this.props.day]
+      if(anotherDay.holidays.length!=0){
+        anotherDay.holidays.map((hol, idx) => {
+          if(this.props.calendarSelection[hol.calendar] === "selected"){
+            this.refs.arc.getStage().container().style.cursor = 'pointer';
+            holidayText = hol.name + ' ' + this.props.dayName + ', ' + this.props.dateText + ' ' + this.props.monthName
+          }
+        })
+      }
     }
     this.setState({
       isMouseInside: true,
       tooltipFont : 20,
-      toolTipx : mousePos.x + 5,
-      toolTipY : mousePos.y + 5,
+      toolTipx : mousePos.x -20,
+      toolTipY : mousePos.y -20,
       tooltipText : holidayText,
-      zIndex:3
     });
 
   }
 
   mouseLeave(){
+    this.refs.arc.getStage().container().style.cursor = 'default';
     this.setState({
       isMouseInside: false,
       tooltipFont : 0,
@@ -62,7 +69,11 @@ class CalendarDay extends React.Component {
     const textY = p.height/2 + (p.innerRadius + 12) * Math.sin((p.rotation + 2.5) * (Math.PI / 180))
     let color
     if(this.props.day===1) color = "blue"
-    else color = "grey"
+    else {
+      if(this.props.monthNumber%2===0)
+      color = "#606060"
+      else color = "#909090"
+    }
     let day = 1
     if(this.props.daysOfYear[this.props.day]!==undefined){
       day=this.props.daysOfYear[this.props.day]
