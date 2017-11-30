@@ -61,6 +61,7 @@ class CalendarWeek extends React.Component {
 
   getMonthName(day){
     let month = moment([this.props.year]).dayOfYear(day).month()
+    console.log(month+1);
     return (month+1)
   }
 

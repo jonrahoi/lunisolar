@@ -7,7 +7,6 @@ class CalendarDay extends React.Component {
   constructor(props){
     super(props)
     this.state = { isMouseInside: false}
-    console.log(`${JSON.stringify(this.props.calendarSelection)}`)
   }
 
   static propTypes = {
