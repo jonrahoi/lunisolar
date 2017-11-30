@@ -66,6 +66,10 @@ render() {
   else color = "grey"
   let day = 1
   if(this.props.daysOfYear[this.props.day]!==undefined){
+  if(this.props.daysOfYear[this.props.day].holidays.length>=1);
+  console.log("what",this.props.daysOfYear[this.props.day].holidays);
+}
+  if(this.props.daysOfYear[this.props.day]!==undefined){
     day=this.props.daysOfYear[this.props.day]
     day.holidays.map((hol, idx) => {
       if(this.props.calendarSelection[hol.calendar] === "selected"){
