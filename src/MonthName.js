@@ -35,7 +35,12 @@ class MonthName extends React.Component {
     const textX = p.width/2 + (p.outerRadius + 60) * Math.cos((p.rotation+10) * (Math.PI / 180))
     const textY = p.height/2 + (p.outerRadius + 60) *  Math.sin((p.rotation+10) * (Math.PI / 180))
     return(
-      <Text text={this.getMonthName()} x={textX} y={textY} fill={'black'} fontSize={20} rotation={105+this.props.rotation}/>
+      <Text text={this.getMonthName()}
+      x={textX}
+      y={textY}
+      fill={'black'}
+      fontSize={20}
+      rotation={105+this.props.rotation}/>
     )
   }
 }

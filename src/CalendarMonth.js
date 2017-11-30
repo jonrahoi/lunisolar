@@ -137,7 +137,12 @@ class CalendarMonth extends React.Component {
   return(
     <Group>
     {numdays}
-    <MonthName rotation = {this.props.rotation} monthn = {this.props.month} outerRadius = {380} height={this.props.height} width={this.props.width}/>
+    <MonthName
+    rotation = {this.props.rotation}
+    monthn = {this.props.month}
+    outerRadius = {380}
+    height={this.props.height}
+    width={this.props.width}/>
     </Group>
   )
 }

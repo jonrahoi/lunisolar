@@ -24,12 +24,14 @@ const calendar = {
 }
 
 let selectionOfCalendars = {
-  "Roman" : "selected",
-  "Hindu" : "selected",
-  "Islamic" : "selected",
-  "Hebrew" : "selected",
-  "Chinese" : "selected"
+  "Roman": "selected",
+  "Hindu": "selected",
+  "Islamic": "selected",
+  "Hebrew": "selected",
+  "Chinese": "selected"
 }
+
+const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 class CircularCalendar extends React.Component {
 
@@ -45,7 +47,6 @@ class CircularCalendar extends React.Component {
 
   loadDays(){
     daysofyear = getAllHolidaysForYear(this.state.currentYear)
-    console.log(daysofyear);
   }
 
   handleClick = (updatedYear)=>{
@@ -63,6 +64,7 @@ class CircularCalendar extends React.Component {
 
   render() {
     this.loadDays()
+
     return (
       <Group>
       {
@@ -85,7 +87,6 @@ class CircularCalendar extends React.Component {
           week={w}
           height={this.props.height}
           totalAngle={totalAngle}
-          colorSelection={this.state.colorSelect}
           year={this.state.currentYear}
           daysOfYear={daysofyear}
           calendar={calendar}
@@ -93,11 +94,27 @@ class CircularCalendar extends React.Component {
           />
         })
       }
+
       <YearToggle
       width={this.props.width}
       height={this.props.height}
       text={this.state.currentYear}
-      handleClick={this.handleClick.bind(this)}/>
+      handleClick={this.handleClick.bind(this)}
+      />
+      {
+        monthName.map((month, idx) => {
+          let monthNameX = this.props.width/2 + 440 * Math.cos((30*idx+270) * (Math.PI / 180))
+          let monthNameY = this.props.height/2 + 440 *  Math.sin((30*idx+270) * (Math.PI / 180))
+          return <Text
+          text={month}
+          x={monthNameX}
+          y={monthNameY}
+          fill={'black'}
+          fontSize={20}
+          rotation={30*idx+5}
+          />
+        })
+      }
       </Group>
     )
   }
