@@ -24,14 +24,15 @@ const calendar = {
 }
 
 let selectionOfCalendars = {
-  "Roman" : "deselected",
-  "Hindu" : "deselected",
-  "Islamic" : "deselected",
-  "Hebrew" : "deselected",
-  "Chinese" : "deselected"
+  "Roman" : "selected",
+  "Hindu" : "selected",
+  "Islamic" : "selected",
+  "Hebrew" : "selected",
+  "Chinese" : "selected"
 }
 
 class CircularCalendar extends React.Component {
+
   state = {
     calendarSelect: selectionOfCalendars,
     currentYear: this.props.yearText,
@@ -42,29 +43,26 @@ class CircularCalendar extends React.Component {
     width: PropTypes.number.isRequired
   }
 
-  constructor (props){
-    super(props)
-    //daysofyear = getAllHolidaysForYear(this.props.yearText)
-    //console.log(daysofyear);
-  }
-
-  componentWillUpdate(){
+  loadDays(){
     daysofyear = getAllHolidaysForYear(this.state.currentYear)
     console.log(daysofyear);
   }
 
   handleClick = (updatedYear)=>{
-    this.setState({currentYear: updatedYear});
-  };
+    this.setState({
+      currentYear: updatedYear
+    })
+  }
 
   calendarSelection = (dataFromSelectCalendar) => {
     Object.assign(selectionOfCalendars, dataFromSelectCalendar)
     this.setState({
-      calendarSelect : selectionOfCalendars
+      calendarSelect: selectionOfCalendars
     })
   }
 
   render() {
+    this.loadDays()
     return (
       <Group>
       {

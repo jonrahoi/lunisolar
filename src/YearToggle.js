@@ -7,7 +7,7 @@ import {Stage, Layer, Arc, Text, Group, Rect, Arrow, Circle} from 'react-konva';
 
 class YearToggle extends React.Component {
 
-  state = { year: this.props.text,interval:0};
+  state = { year: this.props.text, interval:0};
 
   mouseClickBackward(){
     let currentYear = this.state.year-1
