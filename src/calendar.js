@@ -41,15 +41,13 @@ const holidays = {
       calendar : "Hindu"
     }
   },
-  "start_of_ramadan" : (year) => {
-    return {
-      date : jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(9, 1, year)),
-      calendar : "Islamic"
+  "ramadan" : (year) => {
+    let ramadanDate=[]
+    for(let i=1; i<=30; i++){
+      ramadanDate.push(jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(9, i, year)))
     }
-  },
-  "end_of_ramadan" : (year) => {
     return {
-      date : jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(10, 1, year)-1),
+      date : ramadanDate,
       calendar : "Islamic"
     }
   },
@@ -116,21 +114,29 @@ const getAllHolidaysForYear = (year, options) => {
 
   Object.keys(holidays).map(name => {
     const h = holidays[name](year)
-    // h.date, h.calendar, h.name
     h.name = name
-    //console.log(h)
-    const date = moment(`${h.date.month}-${h.date.day}-${h.date.year}`, 'M-D-YYYY')
-    const dayOfYear = date.dayOfYear()
-    //console.log(`${h.name} ${date} ${dayOfYear}`)
-    const day = days[dayOfYear]
-    if (day){
-      day.holidays.push(h)
-    }else{
-      console.log(`${dayOfYear} dayOfYear not found!!`)
+    console.log(`is array ${h.date instanceof Array}`);
+
+    let date, dayOfYear, day
+    if(h.date instanceof Array){
+      h.date.map(d=>{
+        date = moment(`${d.month}-${d.day}-${d.year}`, 'M-D-YYYY')
+        dayOfYear = date.dayOfYear()
+        day = days[dayOfYear]
+        if (day){
+          day.holidays.push(h)
+        }
+      })
     }
-
+    else{
+      date = moment(`${h.date.month}-${h.date.day}-${h.date.year}`, 'M-D-YYYY')
+      dayOfYear = date.dayOfYear()
+      day = days[dayOfYear]
+      if (day){
+        day.holidays.push(h)
+      }
+    }
   })
-
   return days
 }
 

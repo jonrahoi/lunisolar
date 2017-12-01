@@ -73,8 +73,8 @@ class CalendarDay extends React.Component {
 
     let day = 1
     if(this.props.daysOfYear[this.props.day]!==undefined){
-      day=this.props.daysOfYear[this.props.day]
-      day.holidays.map((hol, idx) => {
+      day = this.props.daysOfYear[this.props.day]
+      day.holidays.map(hol => {
         if(this.props.calendarSelection[hol.calendar] === "selected"){
           color = this.props.calendar[hol.calendar]
         }
