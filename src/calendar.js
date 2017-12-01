@@ -11,37 +11,49 @@ const shortHands = {
 const cli = nopt(knownOpts, shortHands, process.argv, 2)
 
 const holidays = {
-  "epiphany" : (year) => {
+  "Epiphany" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.epiphany(year)),
       calendar : "Roman"
     }
   },
-  "independence_day" : (year) => {
+  "Independence Day" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.independence_day(year)),
       calendar : "Roman"
     }
   },
-  "easter" : (year) => {
+  "Easter" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.easter(year)),
       calendar : "Roman"
     }
   },
-  "christmas" : (year) => {
+  "Christmas" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.christmas(year)),
       calendar : "Roman"
     }
   },
-  "diwali" : (year) => {
+  "Diwali" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.diwali(year)),
       calendar : "Hindu"
     }
   },
-  "ramadan" : (year) => {
+  "Shivaratri" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.shiva(year)),
+      calendar : "Hindu"
+    }
+  },
+  "Rama Navami" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.rama(year)),
+      calendar : "Hindu"
+    }
+  },
+  "Ramadan" : (year) => {
     let ramadanDate=[]
     for(let i=1; i<=30; i++){
       ramadanDate.push(jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(9, i, year)))
@@ -51,43 +63,43 @@ const holidays = {
       calendar : "Islamic"
     }
   },
-  "miwlid_an_nabi" : (year) => {
+  "Mawlid an-Nabi" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.miwlid_an_nabi(year)),
       calendar : "Islamic"
     }
   },
-  "yom_kippur" : (year) => {
+  "Yom Kippur" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.yom_kippur(year)),
       calendar : "Hebrew"
     }
   },
-  "passover" : (year) => {
+  "Passover" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.passover(year)),
       calendar : "Hebrew"
     }
   },
-  "advent" : (year) => {
+  "Advent" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.advent(year)),
       calendar : "Roman"
     }
   },
-  "chinese_new_year" : (year) => {
+  "Chinese New Year" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.chinese_new_year(year)),
       calendar : "Chinese"
     }
   },
-  "dragon_festival" : (year) => {
+  "Dragon Boat Festival" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.dragon_festival(year)),
       calendar : "Chinese"
     }
   },
-  "qing_ming" : (year) => {
+  "Qingming" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.qing_ming(year)),
       calendar : "Chinese"
@@ -115,8 +127,6 @@ const getAllHolidaysForYear = (year, options) => {
   Object.keys(holidays).map(name => {
     const h = holidays[name](year)
     h.name = name
-    console.log(`is array ${h.date instanceof Array}`);
-
     let date, dayOfYear, day
     if(h.date instanceof Array){
       h.date.map(d=>{
