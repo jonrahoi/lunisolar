@@ -43,7 +43,6 @@ class CalendarDay extends React.Component {
       toolTipY : mousePos.y + 5,
       tooltipText : holidayText,
     });
-
   }
 
   mouseLeave(){
@@ -69,12 +68,9 @@ class CalendarDay extends React.Component {
 
     const textY = p.height/2 + (p.innerRadius + 12) * Math.sin((p.rotation + 2.5) * (Math.PI / 180))
     let color
-    if(this.props.day===1) color = "blue"
-    else {
-      if(this.props.monthNumber%2===0)
-      color = "#606060"
-      else color = "#909090"
-    }
+    if(this.props.monthNumber%2===0) color = "#606060"
+    else color = "#909090"
+
     let day = 1
     if(this.props.daysOfYear[this.props.day]!==undefined){
       day=this.props.daysOfYear[this.props.day]
