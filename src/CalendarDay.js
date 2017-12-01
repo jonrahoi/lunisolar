@@ -35,7 +35,7 @@ class CalendarDay extends React.Component {
         })
       }
     }
-    
+
     this.setState({
       isMouseInside: true,
       tooltipFont : 30,
@@ -108,7 +108,7 @@ class CalendarDay extends React.Component {
       x={this.state.toolTipx}
       y={this.state.toolTipY}
       fontSize={this.state.tooltipFont}
-      fill={"blue"} />
+      fill={"blue"}/>
 
       </Group>
     )
