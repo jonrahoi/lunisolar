@@ -25,8 +25,8 @@ class SelectCalendar extends React.Component {
       }))
       this.setState(function() {
         let color = this.props.calendarColor
-        this.props.calendarSelection({[colorsOfCalendar[color]] : "deselected"});
-      });
+        this.props.calendarSelection({[colorsOfCalendar[color]] : "deselected"})
+      })
     }
     else{
       this.setState((prevState, props) => ({
@@ -35,8 +35,8 @@ class SelectCalendar extends React.Component {
     ))
     this.setState(function() {
       let color = this.props.calendarColor
-      this.props.calendarSelection({[colorsOfCalendar[color]] : "selected"});
-    });
+      this.props.calendarSelection({[colorsOfCalendar[color]] : "selected"})
+    })
   }
 }
 

@@ -42,6 +42,10 @@ class CalendarWeek extends React.Component {
     return (month+1)
   }
 
+  displayTooltip = (displayTooltipData) => {
+    this.props.displayTooltip(displayTooltipData)
+  }
+
   render() {
     return(
       <Group>
@@ -65,10 +69,11 @@ class CalendarWeek extends React.Component {
           daysOfYear={this.props.daysOfYear}
           calendar={this.props.calendar}
           calendarSelection={this.props.calendarSelection}
-          dateText = {this.dateFromDay(day)}
-          monthName = {this.getMonthName(day)}
-          dayName = {this.getDayName(day)}
-          monthNumber = {this.getMonthNumber(day)}
+          dateText={this.dateFromDay(day)}
+          monthName={this.getMonthName(day)}
+          dayName={this.getDayName(day)}
+          monthNumber={this.getMonthNumber(day)}
+          displayTooltip={this.displayTooltip.bind(this)}
           />
         })
       }
@@ -76,4 +81,4 @@ class CalendarWeek extends React.Component {
     )
   }
 }
-export default CalendarWeek;
+export default CalendarWeek

@@ -3,7 +3,7 @@ import CalendarWeek from './CalendarWeek'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
 import SelectCalendar from './SelectCalendar'
-import {Stage, Group, Layer, Arc, Text} from 'react-konva'
+import {Stage, Group, Layer, Arc, Rect, Text} from 'react-konva'
 const getAllHolidaysForYear = require('./calendar')
 
 const weeks = []
@@ -31,6 +31,12 @@ let selectionOfCalendars = {
   "Chinese": "selected"
 }
 
+let tooltipDisplay = {
+  tooltipX: 0,
+  tooltipY: 0,
+  tooltipText: ""
+}
+
 const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 class CircularCalendar extends React.Component {
@@ -38,6 +44,7 @@ class CircularCalendar extends React.Component {
   state = {
     calendarSelect: selectionOfCalendars,
     currentYear: this.props.yearText,
+    tooltip: tooltipDisplay
   }
 
   static propTypes = {
@@ -62,9 +69,15 @@ class CircularCalendar extends React.Component {
     })
   }
 
+  displayTooltip = (displayTooltipData) => {
+    Object.assign(tooltipDisplay, displayTooltipData)
+    this.setState({
+      tooltip: tooltipDisplay
+    })
+  }
+
   render() {
     this.loadDays()
-
     return (
       <Group>
       {
@@ -74,7 +87,8 @@ class CircularCalendar extends React.Component {
           height={this.props.height/10+(idx*40)}
           calendar={c}
           calendarColor={calendar[c]}
-          calendarSelection={this.calendarSelection.bind(this)}/>
+          calendarSelection={this.calendarSelection.bind(this)}
+          />
         })
       }
       {
@@ -91,6 +105,7 @@ class CircularCalendar extends React.Component {
           daysOfYear={daysofyear}
           calendar={calendar}
           calendarSelection={this.state.calendarSelect}
+          displayTooltip={this.displayTooltip.bind(this)}
           />
         })
       }
@@ -115,6 +130,23 @@ class CircularCalendar extends React.Component {
           />
         })
       }
+
+      <Rect
+      width={this.state.tooltip.tooltipText.length*7.5}
+      height={15}
+      x={this.state.tooltip.tooltipX}
+      y={this.state.tooltip.tooltipY}
+      fill={'#F5F5F5'}
+      />
+
+      <Text
+      text={this.state.tooltip.tooltipText}
+      x={this.state.tooltip.tooltipX}
+      y={this.state.tooltip.tooltipY}
+      fontSize={15}
+      fill={'black'}
+      />
+
       </Group>
     )
   }
