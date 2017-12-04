@@ -49,6 +49,22 @@ class CalendarDay extends React.Component {
         tooltipText: ""})
       }
 
+      click(){
+        let holidayText
+        let anotherDay
+        if(this.props.daysOfYear[this.props.day]!==undefined){
+          anotherDay=this.props.daysOfYear[this.props.day]
+          if(anotherDay.holidays.length!=0){
+            anotherDay.holidays.map((hol, idx) => {
+              if(this.props.calendarSelection[hol.calendar] === "selected"){
+                holidayText = hol.name
+                window.open('https://en.wikipedia.org/wiki/'+holidayText)
+                }
+              })
+            }
+          }
+      }
+
       /**
       * start at x, y
       * go via angle, plus inner radius
@@ -85,6 +101,7 @@ class CalendarDay extends React.Component {
           fill={color}
           onMouseEnter={this.hover.bind(this)}
           onMouseLeave={this.mouseLeave.bind(this)}
+          onClick={this.click.bind(this)}
           />
 
           <Text
@@ -93,6 +110,9 @@ class CalendarDay extends React.Component {
           y={textY}
           fill={'white'}
           fontSize={10}
+          onMouseEnter={this.hover.bind(this)}
+          onMouseLeave={this.mouseLeave.bind(this)}
+          onClick={this.click.bind(this)}
           />
 
           </Group>
