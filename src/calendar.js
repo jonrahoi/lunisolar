@@ -1,14 +1,14 @@
 const jsCal = require('./jscal')
-const nopt = require('nopt')
+// const nopt = require('nopt')
 const moment = require('moment')
 
-const knownOpts = {
-    year : Number
-}
-const shortHands = {
-    y : ['--year']
-}
-const cli = nopt(knownOpts, shortHands, process.argv, 2)
+// const knownOpts = {
+//     year : Number
+// }
+// const shortHands = {
+//     y : ['--year']
+// }
+// const cli = nopt(knownOpts, shortHands, process.argv, 2)
 
 const holidays = {
   "epiphany" : (year) => {
@@ -99,8 +99,7 @@ const holidays = {
 
 const getAllHolidaysForYear = (year, options) => {
     const days = []
-    const thisYear = moment([year])
-    console.log(year, moment([year]))
+    // const thisYear = moment([year])
 
     const numDays = moment([year]).isLeapYear() ? 366 : 365
 
@@ -117,17 +116,15 @@ const getAllHolidaysForYear = (year, options) => {
       const h = holidays[name](year)
       // h.date, h.calendar, h.name
       h.name = name
-      console.log(h)
       const date = moment(`${h.date.month}-${h.date.day}-${h.date.year}`, 'M-D-YYYY')
       const dayOfYear = date.dayOfYear()
-      console.log(`${h.name} ${date} ${dayOfYear}`)
       const day = days[dayOfYear]
       if (day){
         day.holidays.push(h)
       }else{
         console.log(`${dayOfYear} dayOfYear not found!!`)
       }
-      
+      return name
     })
 
     return days

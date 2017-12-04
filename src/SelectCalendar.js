@@ -1,17 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import {Stage, Layer, Text, Group, Rect} from 'react-konva';
-
-const mouseStyle =  {
-  cursor:"pointer"
-}
+import {Text, Group, Rect} from 'react-konva';
 
 class SelectCalendar extends React.Component {
 
   state = {color: 'white'}
 
   changeColor(calendarColor){
-    if(this.state.color == this.props.calendarColor){
+    if(this.state.color === this.props.calendarColor){
       this.setState((prevState, props) => ({
         color: 'white'
       }

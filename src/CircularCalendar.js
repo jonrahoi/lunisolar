@@ -3,7 +3,7 @@ import CalendarWeek from './CalendarWeek'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
 import SelectCalendar from './SelectCalendar'
-import {Stage, Group, Layer, Arc, Text} from 'react-konva'
+import {Group} from 'react-konva'
 const getAllHolidaysForYear = require('./calendar')
 
 const weeks = []
@@ -70,7 +70,7 @@ class CircularCalendar extends React.Component {
       <Group>
       {
         Object.keys(calendar).map((c,idx)=>{
-          return <SelectCalendar width={this.props.width/10} height={this.props.height/10+(idx*40)} calendar={c} calendarColor={calendar[c]} colorSelection={this.colorSelection.bind(this)}/>
+          return <SelectCalendar key={c} width={this.props.width/10} height={this.props.height/10+(idx*40)} calendar={c} calendarColor={calendar[c]} colorSelection={this.colorSelection.bind(this)}/>
         })
       }
       {

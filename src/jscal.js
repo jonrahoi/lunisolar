@@ -176,6 +176,9 @@ const jsCal = {
             case this.SATURDAY:
                 day_name = "Saturday";
                 break;
+            default:
+                day_name = "Sunday";
+                break;
         }
         return day_name;
     },
@@ -1967,7 +1970,7 @@ const jsCal = {
         var y = this.sin_degrees(psi_prime - psi);
         var x = ((this.cosine_degrees(phi) * this.tangent_degrees(phi_prime)) -
             (this.sin_degrees(phi) * this.cosine_degrees(psi - psi_prime)));
-        if (x === 0 && y === 0 || this.phi_prime === this.deg(90)) {
+        if ((x === 0 && y === 0) || (this.phi_prime === this.deg(90))) {
             return this.deg(0);
         } else if (phi_prime === this.deg(-90)) {
             return this.deg(180);
@@ -3685,7 +3688,6 @@ const jsCal = {
         var approx = (this.hindu_epoch() - 3 +
             this.ifloor(((year + this.HINDU_SOLAR_ERA) + ((month - 1) / 12)) *
                 this.mean_sidereal_year()));
-        var _this = this;
         var begin = this.next(approx, function (i) {
             return (this.sidereal_zodiac(this.astro_hindu_sunset(i)) === month);
         });

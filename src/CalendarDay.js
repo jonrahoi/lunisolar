@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {Stage, Layer, Arc, Text, Group} from 'react-konva'
+import * as Color from 'color'
+import {Arc, Text, Group} from 'react-konva'
 
 class CalendarDay extends React.Component {
 
@@ -17,14 +18,12 @@ class CalendarDay extends React.Component {
     week: PropTypes.number.isRequired,
     day: PropTypes.number.isRequired,
     textFont: PropTypes.number.isRequired,
-    daysOfYear: PropTypes.object.isRequired
+    daysOfYear: PropTypes.array.isRequired
   }
 
   updateCalendar(){
-    const ctx = this.refs.arc.getContext('2d')
+    // const ctx = this.refs.arc.getContext('2d')
     this.refs.arc.fillEnabled(true)
-    this.refs.arc.fill("grey")
-
   }
 
   componentDidMount(){
@@ -38,9 +37,8 @@ class CalendarDay extends React.Component {
   hover(){
        let mousePos = this.refs.arc.getStage().getPointerPosition();
        let holidayText = ""
-       let rect = this.refs.text.shadowColor("grey")
+      //  let rect = this.refs.text.shadowColor("grey")
        this.refs.text.shadowOpacity(0.5)
-      //console.log("rect ",rect);
        if(this.props.ishoLiday===1){
          holidayText = this.props.holidayName
        }
@@ -77,11 +75,13 @@ class CalendarDay extends React.Component {
 
     const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin(p.rotation * (Math.PI / 180))
 
-    const day = this.props.daysOfYear[this.props.day]
-    console.log(day)
+    // const day = this.props.daysOfYear[this.props.day]
+
+    const color = Color.hsl(this.props.day+5, 100, 50)
 
     return (
-      <Group>
+      <Group fill={'green'}
+      color={'green'}>
     <Arc
       ref="arc"
       rotation={this.props.rotation}
@@ -92,9 +92,10 @@ class CalendarDay extends React.Component {
       angle={this.props.totalAngle}
       onMouseEnter = {this.hover.bind(this)}
       onMouseLeave = {this.mouseLeave.bind(this)}
+      fill={color}
       />
-      <Text text={1} x={textX} y={textY} fill={'white'} fontSize={10} />
-      <Text ref = "text" text={this.state.tooltipText} x={this.state.toolTipx} y = {this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
+      <Text text={this.props.day} x={textX} y={textY} fill={"white"} fontSize={10} />
+      <Text ref="text" text={this.state.tooltipText} x={this.state.toolTipx} y={this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
 
       </Group>
     )
