@@ -17,7 +17,7 @@ const holidays = {
       calendar : "Roman"
     }
   },
-  "Independence Day" : (year) => {
+  "Independence Day (United States)" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.independence_day(year)),
       calendar : "Roman"

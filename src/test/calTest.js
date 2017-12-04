@@ -9,7 +9,10 @@ const shortHands = {
 }
 const cli = nopt(knownOpts, shortHands, process.argv, 2)
 
-const getAllHolidaysForYear = (year, options) => {
+const ans = jsCal.lunar_phase('2018')
+console.log("what is this",ans);
+
+/*const getAllHolidaysForYear = (year, options) => {
     // generate the entire blob
     const fixed = jsCal.fixed_from_gregorian(jsCal.gregorian_date(year, jsCal.JANUARY, 1))
     return {
@@ -41,7 +44,7 @@ const getAllHolidaysForYear = (year, options) => {
     }
 }
 
-// console.log(`cli.year = ${cli.year}`)
+ //console.log(`cli.year = ${cli.year}`)
 // console.log(getAllHolidaysForYear(cli.year))
-
-module.exports = getAllHolidaysForYear
+*/
+//module.exports = getAllHolidaysForYear
