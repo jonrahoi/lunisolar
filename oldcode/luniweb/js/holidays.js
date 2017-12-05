@@ -142,7 +142,7 @@ var holidays = {
             return jscal.fixed_from_islamic(jscal.islamic_date(islamic.year, 10, 1));
         },
         //Eid al-Adha (10 Dhu'l-Hijjah)                    u
-        "Eid_al-Ahda":function (year) {
+        "Eid_al-Adha":function (year) {
             var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
             var islamic = jscal.islamic_from_fixed(fixed);
             return jscal.fixed_from_islamic(jscal.islamic_date(islamic.year, 12, 10));
@@ -316,7 +316,7 @@ var holidays = {
         "Independence_Day":function (year) {
             return jscal.independence_day(year);
         },
-        "Larbor_Day":function (year) {
+        "Labor_Day":function (year) {
             return jscal.labor_day(year);
         },
         "election_day":function (year) {
