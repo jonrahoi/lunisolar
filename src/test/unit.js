@@ -33,8 +33,6 @@ it('gets Yom Kippur right', () => {
         const date = moment(d, 'YYYY MMM D')
         const yk = holidays['Yom Kippur'](date.year()).date
         const ykdate = moment(`${yk.month}-${yk.day}-${yk.year}`, 'M-D-YYYY')
-        // console.log(`${date} ${ykdate}`)
         expect(date.isSame(ykdate, 'day')).to.equal(true)
     })
-    expect(1 + 1).to.equal(2);
 });
