@@ -15,38 +15,14 @@ class CalendarWeek extends React.Component {
     totalAngle: PropTypes.number.isRequired,
     rotation: PropTypes.number.isRequired,
     week: PropTypes.number.isRequired,
-    numWeeks : PropTypes.number.isRequired,
+    numWeeks: PropTypes.number.isRequired,
     year: PropTypes.number.isRequired
   }
 
-  getHoliday(d,w){
-    const dd = this.getDateText(d,w)
-    if(dd in this.props.holidayForMonth){
-      return 1
-    } else {
-      return 0
-    }
-  }
-
-  getHolidayName(d,w){
-    let day = this.getDateText(d,w)
-    if(day in this.props.holidayForMonth){
-      const obj = this.props.holidayForMonth[day]
-      return obj[day]
-    }
-  }
-
-  getColor(d,w){
-    let day = this.getDateText(d,w)
-    if (this.props.colorSelection !== undefined && day in this.props.holidayForMonth && this.props.colorSelection[this.props.holidayForMonth[day].holidaycolor] === "selected"){
-      return this.props.holidayForMonth[day].holidaycolor
-    }
-    else{
-      return this.props.color
-    }
-  }
   dateFromDay(day) {
-    let date = moment([this.props.year]).dayOfYear(day).date()
+    let date
+    if((moment([this.props.year]).isLeapYear() && day <= 366) || (!moment([this.props.year]).isLeapYear() && day <= 365))
+      date = moment([this.props.year]).dayOfYear(day).date()
     return date
   }
 
@@ -74,7 +50,7 @@ class CalendarWeek extends React.Component {
       <Group>
       {
         daysOfWeek.map((d, idx) => {
-          const inner = 200 + (30 * idx)
+          let outer = 410 - (30 * idx)
           const day = this.props.week * 7 + d
           return <CalendarDay
           height={this.props.height}
@@ -86,9 +62,8 @@ class CalendarWeek extends React.Component {
           day={day}
           key={day}
           rotation={this.props.rotation}
-          innerRadius={inner}
-          outerRadius={inner+30}
-          textFont={d+5}
+          innerRadius={outer-30}
+          outerRadius={outer}
           daysOfYear={this.props.daysOfYear}
           calendar={this.props.calendar}
           calendarSelection={this.props.calendarSelection}

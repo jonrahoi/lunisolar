@@ -68,10 +68,10 @@ class CalendarDay extends React.Component {
               if(this.props.calendarSelection[hol.calendar] === "selected"){
                 holidayText = hol.name
                 window.open('https://en.wikipedia.org/wiki/'+holidayText)
-                }
-              })
-            }
+              }
+            })
           }
+        }
       }
 
       /**
@@ -90,6 +90,8 @@ class CalendarDay extends React.Component {
         // else color = "#909090"
         let color = Color.hsl(this.props.day/2, 100, 50)
         const date = moment(`${this.props.monthNumber}-${this.props.dateText}-2017`, 'M-D-YYYY')
+//console.log(`date is ${date}; day is ${this.props.day} ; this.props.dateText ${this.props.dateText}`);
+
         let season = ((day) => {
           if (day <= 80 || day >= 352){
             return seasonColors[0]
@@ -144,7 +146,7 @@ class CalendarDay extends React.Component {
           </Group>
         )
 
+      }
     }
-}
 
-export default CalendarDay;
+    export default CalendarDay;
