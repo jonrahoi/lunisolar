@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "code": "^5.1.2",
     "color": "^2.0.0",
     "konva": "^1.7.0",
+    "lab": "^15.1.2",
     "moment": "^2.19.2",
     "nopt": "^4.0.1",
     "react": "^15.6.1",
@@ -17,6 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:unit": "node src/test/unit.js",
     "eject": "react-scripts eject"
   }
 }

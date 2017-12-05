@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
 import SelectCalendar from './SelectCalendar'
 import {Group, Text, Rect} from 'react-konva'
-const getAllHolidaysForYear = require('./calendar')
+import {getAllHolidaysForYear} from './calendar'
 
 const weeks = []
 for (let x=0; x< 53; x++){

@@ -229,4 +229,4 @@ const getAllHolidaysForYear = (year, options) => {
 
 // console.log(getAllHolidaysForYear(cli.year))
 
-module.exports = getAllHolidaysForYear
+module.exports = {getAllHolidaysForYear, holidays}
