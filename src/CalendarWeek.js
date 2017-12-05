@@ -2,8 +2,11 @@ import React from 'react';
 import {Group} from 'react-konva';
 import PropTypes from 'prop-types'
 import CalendarDay from './CalendarDay';
+const moment = require('moment')
 
 const daysOfWeek  = [1,2,3,4,5,6,7]
+const nameOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+const nameOfMonth = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
 
 class CalendarWeek extends React.Component {
   static propTypes = {
@@ -42,15 +45,37 @@ class CalendarWeek extends React.Component {
       return this.props.color
     }
   }
+  dateFromDay(day) {
+    let date = moment([this.props.year]).dayOfYear(day).date()
+    return date
+  }
+
+  getMonthName(day) {
+    let month = moment([this.props.year]).dayOfYear(day).month()
+    return (nameOfMonth[month])
+  }
+
+  getDayName(day) {
+    let dayName = moment([this.props.year]).dayOfYear(day).day()
+    return (nameOfWeek[dayName])
+  }
+
+  getMonthNumber(day) {
+    let month = moment([this.props.year]).dayOfYear(day).month()
+    return (month+1)
+  }
+
+  displayTooltip = (displayTooltipData) => {
+    this.props.displayTooltip(displayTooltipData)
+  }
 
   render() {
-
-    const numdays = daysOfWeek.map((d, idx) => {
-
+    return(
+      <Group>
+      {
+        daysOfWeek.map((d, idx) => {
           const inner = 200 + (30 * idx)
-          // current day of the year
           const day = this.props.week * 7 + d
-
           return <CalendarDay
           height={this.props.height}
           width={this.props.width}
@@ -65,14 +90,18 @@ class CalendarWeek extends React.Component {
           outerRadius={inner+30}
           textFont={d+5}
           daysOfYear={this.props.daysOfYear}
-          colorSelection={this.props.colorSelection}
+          calendar={this.props.calendar}
+          calendarSelection={this.props.calendarSelection}
+          dateText={this.dateFromDay(day)}
+          monthName={this.getMonthName(day)}
+          dayName={this.getDayName(day)}
+          monthNumber={this.getMonthNumber(day)}
+          displayTooltip={this.displayTooltip.bind(this)}
           />
-        })    
-  return(
-    <Group>
-    {numdays}
-    </Group>
-  )
+        })
+      }
+      </Group>
+    )
+  }
 }
-}
-export default CalendarWeek;
+export default CalendarWeek

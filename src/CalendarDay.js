@@ -2,6 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import * as Color from 'color'
 import {Arc, Text, Group} from 'react-konva'
+const moment = require('moment')
+
+const seasonColors = [
+  '#7f7c98',
+  '#A3BD76',
+  '#FDEB90',
+  '#D39383'
+]
 
 class CalendarDay extends React.Component {
 
@@ -21,85 +29,102 @@ class CalendarDay extends React.Component {
     daysOfYear: PropTypes.array.isRequired
   }
 
-  updateCalendar(){
-    // const ctx = this.refs.arc.getContext('2d')
-    this.refs.arc.fillEnabled(true)
-  }
-
-  componentDidMount(){
-    this.updateCalendar()
-  }
-
-  componentDidUpdate(){
-    this.updateCalendar()
-  }
-
   hover(){
-       let mousePos = this.refs.arc.getStage().getPointerPosition();
-       let holidayText = ""
-      //  let rect = this.refs.text.shadowColor("grey")
-       this.refs.text.shadowOpacity(0.5)
-       if(this.props.ishoLiday===1){
-         holidayText = this.props.holidayName
-       }
-      this.setState({
-        isMouseInside: true,
-        tooltipFont : 20,
-        toolTipx : mousePos.x + 5,
-        toolTipY : mousePos.y + 5,
-        tooltipText : holidayText,
-        zIndex:3
-      });
-
+    let mousePos = this.refs.arc.getStage().getPointerPosition();
+    let holidayText = ""
+    let anotherDay
+    if(this.props.daysOfYear[this.props.day]!==undefined){
+      anotherDay=this.props.daysOfYear[this.props.day]
+      if(anotherDay.holidays.length !== 0){
+        anotherDay.holidays.forEach((hol, idx) => {
+          if(this.props.calendarSelection[hol.calendar] === "selected"){
+            this.refs.arc.getStage().container().style.cursor = 'pointer';
+            holidayText = hol.name + ' : ' + this.props.dayName + ' , ' + this.props.dateText + ' ' + this.props.monthName
+            this.props.displayTooltip({
+              tooltipX: mousePos.x + 5,
+              tooltipY: mousePos.y + 5,
+              tooltipText: holidayText})
+            }
+          })
+        }
+      }
     }
 
     mouseLeave(){
-      this.setState({
-        isMouseInside: false,
-        tooltipFont : 0,
-        toolTipx : 0,
-        toolTipY : 0,
-        tooltipText : ""
-      });
+      this.refs.arc.getStage().container().style.cursor = 'default';
+      this.props.displayTooltip({
+        tooltipX: 0,
+        tooltipY: 0,
+        tooltipText: ""})
+      }
 
+      /**
+      * start at x, y
+      * go via angle, plus inner radius
+      */
+      
+      render() {
+        const p = this.props
+
+        const textX = p.width/2 + (p.innerRadius + 12) * Math.cos((p.rotation + 2.5) * (Math.PI / 180))
+
+        const textY = p.height/2 + (p.innerRadius + 12) * Math.sin((p.rotation + 2.5) * (Math.PI / 180))
+        // let color
+        // if(this.props.monthNumber%2===0) color = "#606060"
+        // else color = "#909090"
+        let color = Color.hsl(this.props.day/2, 100, 50)
+        const date = moment(`${this.props.monthNumber}-${this.props.dateText}-2017`, 'M-D-YYYY')
+        let season = ((day) => {
+          if (day <= 80 || day >= 352){
+            return seasonColors[0]
+          }
+          if (day <= 170){
+            return seasonColors[1]
+          }
+          if (day <= 262){
+            return seasonColors[2]
+          }
+          return seasonColors[3]
+        })(this.props.day)
+
+        color = Color(season)
+
+        let day = 1
+        if(this.props.daysOfYear[this.props.day]!==undefined){
+          day = this.props.daysOfYear[this.props.day]
+          day.holidays.forEach(hol => {
+            if(this.props.calendarSelection[hol.calendar] === "selected"){
+              color = this.props.calendar[hol.calendar]
+            }
+          })
+        }
+        return (
+          <Group>
+          <Arc
+          ref="arc"
+          rotation={this.props.rotation}
+          x={this.props.width/2}
+          y={this.props.height/2}
+          innerRadius={this.props.innerRadius}
+          outerRadius={this.props.outerRadius}
+          angle={this.props.totalAngle}
+          fill={color}
+          onMouseEnter={this.hover.bind(this)}
+          onMouseLeave={this.mouseLeave.bind(this)}
+          />
+
+          <Text
+          text={this.props.dateText}
+          x={textX}
+          y={textY}
+          fill={'white'}
+          fontSize={10}
+          />
+
+          </Group>
+        )
+      
     }
-
-  /**
-  * start at x, y
-  * go via angle, plus inner radius
-  */
-  render() {
-    const p = this.props
-
-    const textX = p.width/2 + (p.innerRadius + 11.5) * Math.cos(p.rotation * (Math.PI / 180))
-
-    const textY = p.height/2 + (p.innerRadius + 11.5) * Math.sin(p.rotation * (Math.PI / 180))
-
-    // const day = this.props.daysOfYear[this.props.day]
-
-    const color = Color.hsl(this.props.day+5, 100, 50)
-
-    return (
-      <Group fill={'green'}
-      color={'green'}>
-    <Arc
-      ref="arc"
-      rotation={this.props.rotation}
-      x={this.props.width/2}
-      y={this.props.height/2}
-      innerRadius={this.props.innerRadius}
-      outerRadius={this.props.outerRadius}
-      angle={this.props.totalAngle}
-      onMouseEnter = {this.hover.bind(this)}
-      onMouseLeave = {this.mouseLeave.bind(this)}
-      fill={color}
-      />
-      <Text text={this.props.day} x={textX} y={textY} fill={"white"} fontSize={10} />
-      <Text ref="text" text={this.state.tooltipText} x={this.state.toolTipx} y={this.state.toolTipY} fontSize={this.state.tooltipFont} fill={"blue"} />
-
-      </Group>
-    )
-  }
 }
 
 export default CalendarDay;

@@ -3,7 +3,7 @@ import CalendarWeek from './CalendarWeek'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
 import SelectCalendar from './SelectCalendar'
-import {Group} from 'react-konva'
+import {Group, Text, Rect} from 'react-konva'
 const getAllHolidaysForYear = require('./calendar')
 
 const weeks = []
@@ -23,18 +23,28 @@ const calendar = {
   "Chinese": "red"
 }
 
-let selectionOfColors = {
-  "yellow" : "deselected",
-  "green" : "deselected",
-  "pink" : "deselected",
-  "violet" : "deselected",
-  "red" : "deselected"
+let selectionOfCalendars = {
+  "Roman": "selected",
+  "Hindu": "selected",
+  "Islamic": "selected",
+  "Hebrew": "selected",
+  "Chinese": "selected"
 }
 
+let tooltipDisplay = {
+  tooltipX: 0,
+  tooltipY: 0,
+  tooltipText: ""
+}
+
+const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 class CircularCalendar extends React.Component {
+
   state = {
-    colorSelect: selectionOfColors,
+    calendarSelect: selectionOfCalendars,
     currentYear: this.props.yearText,
+    tooltip: tooltipDisplay
   }
 
   static propTypes = {
@@ -42,59 +52,101 @@ class CircularCalendar extends React.Component {
     width: PropTypes.number.isRequired
   }
 
-  constructor (props){
-    super(props)
-    daysofyear = getAllHolidaysForYear(this.props.yearText) 
-  }
-
-  componentWillMount(){
-    
+  loadDays(){
+    daysofyear = getAllHolidaysForYear(this.state.currentYear)
   }
 
   handleClick = (updatedYear)=>{
-    this.setState({currentYear: updatedYear});
-  };
-
-  colorSelection = (dataFromSelectCalendar) => {
-    console.log(`data from select ${JSON.stringify(dataFromSelectCalendar)}`);
-    Object.assign(selectionOfColors, dataFromSelectCalendar)
-    console.log(`this ${JSON.stringify(selectionOfColors)}`);
     this.setState({
-      colorSelect : selectionOfColors
+      currentYear: updatedYear
     })
-    console.log(`color selection ${JSON.stringify(this.state.colorSelect)}`);
+  }
+
+  calendarSelection = (dataFromSelectCalendar) => {
+    Object.assign(selectionOfCalendars, dataFromSelectCalendar)
+    this.setState({
+      calendarSelect: selectionOfCalendars
+    })
+  }
+
+  displayTooltip = (displayTooltipData) => {
+    Object.assign(tooltipDisplay, displayTooltipData)
+    this.setState({
+      tooltip: tooltipDisplay
+    })
   }
 
   render() {
+    this.loadDays()
     return (
       <Group>
       {
         Object.keys(calendar).map((c,idx)=>{
-          return <SelectCalendar key={c} width={this.props.width/10} height={this.props.height/10+(idx*40)} calendar={c} calendarColor={calendar[c]} colorSelection={this.colorSelection.bind(this)}/>
+          return <SelectCalendar
+          width={this.props.width/10}
+          height={this.props.height/10+(idx*40)}
+          calendar={c}
+          calendarColor={calendar[c]}
+          calendarSelection={this.calendarSelection.bind(this)}
+          />
         })
       }
       {
         weeks.map((w, idx) => {
-          
           return <CalendarWeek
           key={w}
           numWeeks={weeks.length}
-          rotation={totalAngle*idx}
+          rotation={totalAngle*idx+265}
           width={this.props.width}
           week={w}
           height={this.props.height}
           totalAngle={totalAngle}
-          colorSelection={this.state.colorSelect}
           year={this.state.currentYear}
           daysOfYear={daysofyear}
+          calendar={calendar}
+          calendarSelection={this.state.calendarSelect}
+          displayTooltip={this.displayTooltip.bind(this)}
           />
         })
       }
+
       <YearToggle
       width={this.props.width}
       height={this.props.height}
       text={this.state.currentYear}
-      handleClick={this.handleClick.bind(this)}/>
+      handleClick={this.handleClick.bind(this)}
+      />
+      {
+        monthName.map((month, idx) => {
+          let monthNameX = this.props.width/2 + 440 * Math.cos((30*idx+270) * (Math.PI / 180))
+          let monthNameY = this.props.height/2 + 440 *  Math.sin((30*idx+270) * (Math.PI / 180))
+          return <Text
+          text={month}
+          x={monthNameX}
+          y={monthNameY}
+          fill={'black'}
+          fontSize={20}
+          rotation={30*idx+5}
+          />
+        })
+      }
+
+      <Rect
+      width={this.state.tooltip.tooltipText.length*7.5}
+      height={15}
+      x={this.state.tooltip.tooltipX}
+      y={this.state.tooltip.tooltipY}
+      fill={'#F5F5F5'}
+      />
+
+      <Text
+      text={this.state.tooltip.tooltipText}
+      x={this.state.tooltip.tooltipX}
+      y={this.state.tooltip.tooltipY}
+      fontSize={15}
+      fill={'black'}
+      />
+
       </Group>
     )
   }
