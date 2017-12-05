@@ -1176,7 +1176,7 @@ const jsCal = {
     "purim":function (g_year) {
         var hebrew_year = g_year - this.gregorian_from_fixed(this.hebrew_epoch());
         var last_month = this.last_month_of_hebrew_year(hebrew_year);
-        return this.fixed_from_hebrew(this.hebre_date(this.hebrew_year(last_month, 14)));
+        return this.fixed_from_hebrew(this.hebrew_date(hebrew_year, last_month, 14));
     },
 
     "ta_anit_esther":function (g_year) {

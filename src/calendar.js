@@ -35,6 +35,36 @@ const holidays = {
       calendar : "Roman"
     }
   },
+  "Advent" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.advent(year)),
+      calendar : "Roman"
+    }
+  },
+  "Labor Day" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.labor_day(year)),
+      calendar : "Roman"
+    }
+  },
+  "Memorial Day" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.memorial_day(year)),
+      calendar : "Roman"
+    }
+  },
+  "Easter" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.easter(year)),
+      calendar : "Roman"
+    }
+  },
+  "Pentecost" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.pentecost(year)),
+      calendar : "Roman"
+    }
+  },
   "Diwali" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.diwali(year)),
@@ -81,10 +111,40 @@ const holidays = {
       calendar : "Hebrew"
     }
   },
-  "Advent" : (year) => {
+  "Purim" : (year) => {
     return {
-      date : jsCal.gregorian_from_fixed(jsCal.advent(year)),
-      calendar : "Roman"
+      date : jsCal.gregorian_from_fixed(jsCal.purim(year)),
+      calendar : "Hebrew"
+    }
+  },
+  "Fast of Esther" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.ta_anit_esther(year)),
+      calendar : "Hebrew"
+    }
+  },
+  "Tisha B'Av" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.tishah_be_av(year)),
+      calendar : "Hebrew"
+    }
+  },
+  "Birkat Hachama" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.birkath_ha_hama(year)),
+      calendar : "Hebrew"
+    }
+  },
+  "Tenth of Tevet" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.tzom_tevet(year)),
+      calendar : "Hebrew"
+    }
+  },
+  "Yom Hazikaron" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.yom_ha_zikkaron(year)),
+      calendar : "Hebrew"
     }
   },
   "Chinese New Year" : (year) => {
