@@ -78,7 +78,7 @@ class CalendarDay extends React.Component {
       * start at x, y
       * go via angle, plus inner radius
       */
-      
+
       render() {
         const p = this.props
 
@@ -134,7 +134,7 @@ class CalendarDay extends React.Component {
           text={this.props.dateText}
           x={textX}
           y={textY}
-          fill={'white'}
+          fill={'black'}
           fontSize={10}
           onMouseEnter={this.hover.bind(this)}
           onMouseLeave={this.mouseLeave.bind(this)}
@@ -143,7 +143,7 @@ class CalendarDay extends React.Component {
 
           </Group>
         )
-      
+
     }
 }
 
