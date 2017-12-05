@@ -106,6 +106,9 @@ class CalendarDay extends React.Component {
         })(this.props.day)
 
         color = Color(season)
+        if(this.props.monthNumber % 2 === 0){
+          color = color.lighten(0.15)
+        }
 
         let day = 1
         if(this.props.daysOfYear[this.props.day]!==undefined){
