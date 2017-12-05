@@ -1,7 +1,6 @@
 import React from 'react';
-import {Stage, Group, Layer, Arc, Text} from 'react-konva';
+import {Group} from 'react-konva';
 import PropTypes from 'prop-types'
-import * as Color from 'color'
 import CalendarDay from './CalendarDay';
 const moment = require('moment')
 
@@ -14,30 +13,54 @@ class CalendarWeek extends React.Component {
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     totalAngle: PropTypes.number.isRequired,
-    color: PropTypes.string.isRequired,
     rotation: PropTypes.number.isRequired,
     week: PropTypes.number.isRequired,
     numWeeks : PropTypes.number.isRequired,
-    selection : PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }
 
-  dateFromDay(day){
+  getHoliday(d,w){
+    const dd = this.getDateText(d,w)
+    if(dd in this.props.holidayForMonth){
+      return 1
+    } else {
+      return 0
+    }
+  }
+
+  getHolidayName(d,w){
+    let day = this.getDateText(d,w)
+    if(day in this.props.holidayForMonth){
+      const obj = this.props.holidayForMonth[day]
+      return obj[day]
+    }
+  }
+
+  getColor(d,w){
+    let day = this.getDateText(d,w)
+    if (this.props.colorSelection !== undefined && day in this.props.holidayForMonth && this.props.colorSelection[this.props.holidayForMonth[day].holidaycolor] === "selected"){
+      return this.props.holidayForMonth[day].holidaycolor
+    }
+    else{
+      return this.props.color
+    }
+  }
+  dateFromDay(day) {
     let date = moment([this.props.year]).dayOfYear(day).date()
     return date
   }
 
-  getMonthName(day){
+  getMonthName(day) {
     let month = moment([this.props.year]).dayOfYear(day).month()
     return (nameOfMonth[month])
   }
 
-  getDayName(day){
+  getDayName(day) {
     let dayName = moment([this.props.year]).dayOfYear(day).day()
     return (nameOfWeek[dayName])
   }
 
-  getMonthNumber(day){
+  getMonthNumber(day) {
     let month = moment([this.props.year]).dayOfYear(day).month()
     return (month+1)
   }

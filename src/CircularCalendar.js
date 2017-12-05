@@ -3,7 +3,7 @@ import CalendarWeek from './CalendarWeek'
 import PropTypes from 'prop-types'
 import YearToggle from './YearToggle'
 import SelectCalendar from './SelectCalendar'
-import {Stage, Group, Layer, Arc, Rect, Text} from 'react-konva'
+import {Group, Text, Rect} from 'react-konva'
 const getAllHolidaysForYear = require('./calendar')
 
 const weeks = []

@@ -1,10 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import {Stage, Layer, Text, Group, Rect} from 'react-konva';
-
-const mouseStyle =  {
-  cursor:"pointer"
-}
+import {Text, Group, Rect} from 'react-konva';
 
 const colorsOfCalendar = {
   "yellow": "Roman",

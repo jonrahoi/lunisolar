@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import CircularCalendar from './CircularCalendar'
-import SelectCalendar from './SelectCalendar'
-import {Stage, Group, Layer, Text} from 'react-konva';
+import {Stage, Group, Layer} from 'react-konva';
 
 const style = {
   border: '5px solid red'

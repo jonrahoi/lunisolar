@@ -1,9 +1,5 @@
 import React from 'react';
-import CalendarMonth from './CalendarMonth'
-import PropTypes from 'prop-types'
-import {Stage, Layer, Arc, Text, Group, Rect, Arrow, Circle} from 'react-konva';
-
-
+import {Text, Group, Rect, Arrow, Circle} from 'react-konva';
 
 class YearToggle extends React.Component {
 
