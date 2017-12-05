@@ -1176,10 +1176,15 @@ const jsCal = {
         return this.BOGUS;
     },
 
-    "purim":function (g_year) {
-        var hebrew_year = g_year - this.gregorian_from_fixed(this.hebrew_epoch());
-        var last_month = this.last_month_of_hebrew_year(hebrew_year);
-        return this.fixed_from_hebrew(this.hebrew_date(hebrew_year, last_month, 14));
+    "purim":function (year) {
+      var fixed = this.fixed_from_gregorian(this.gregorian_date(year, this.JANUARY, 1));
+      var hebrew = this.hebrew_from_fixed(fixed);
+      if (this.is_hebrew_leap_year(hebrew.year)) {
+        return this.fixed_from_hebrew(this.hebrew_date(hebrew.year, this.ADARII, 14));
+      }
+      else {
+        return this.fixed_from_hebrew(this.hebrew_date(hebrew.year, this.ADAR, 14));
+      }
     },
 
     "ta_anit_esther":function (g_year) {
@@ -3216,7 +3221,15 @@ const jsCal = {
         }
         return this.BOGUS;
     },
-
+    "chongyang":function (year) {
+        var fixed = this.fixed_from_gregorian(this.gregorian_date(year, this.JANUARY, 1));
+        var chinese = this.chinese_from_fixed(fixed);
+        var ret = [];
+        ret.push(this.fixed_from_chinese(this.chinese_date(chinese.cycle, chinese.year, 9, chinese.leap, 9)));
+        ret.push(this.fixed_from_chinese(this.chinese_date(chinese.cycle, chinese.year + 1, 9, chinese.leap, 9)));
+        ret.push(this.fixed_from_chinese(this.chinese_date(chinese.cycle, chinese.year + 2, 9, chinese.leap, 9)));
+        return ret;
+    },
     "chinese_year_marriage_augury":function (cycle, year) {
         var new_year = this.fixed_from_chinese(this.chinese_date(cycle, year, 1, false, 1));
         var c = (year === 60) ? (cycle + 1) : cycle;
@@ -3841,7 +3854,14 @@ const jsCal = {
     "diwali":function (g_year) {
         return this.hindu_lunar_holiday(8, 1, g_year);
     },
-
+    "holi":function (year) {
+        var fixed = this.fixed_from_gregorian(this.gregorian_date(year, this.JANUARY, 1));
+        var old_hindu = this.old_hindu_lunar_from_fixed(fixed);
+        return this.fixed_from_old_hindu_lunar(this.old_hindu_lunar_date(old_hindu.year, 12, old_hindu.leap, 16));
+    },
+    "makar_sankranti":function (year) {
+        return this.fixed_from_gregorian(this.gregorian_date(year, this.JANUARY, 14));
+    },
     "hindu_tithi_occur":function (l_month, tithi, tee, l_year) {
         var approx = this.hindu_date_occur(l_month, this.ifloor(tithi), l_year);
         var lunar = this.hindu_lunar_day_at_or_after(tithi, approx - 2);

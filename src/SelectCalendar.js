@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, Group, Rect} from 'react-konva';
 
 const colorsOfCalendar = {
-  "yellow": "Roman",
+  "gold": "Roman",
   "green": "Hindu",
   "pink": "Islamic",
   "violet": "Hebrew",

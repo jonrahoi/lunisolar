@@ -16,7 +16,7 @@ let daysofyear = {}
 const totalAngle = 360 / weeks.length
 
 const calendar = {
-  "Roman": "yellow",
+  "Roman": "gold",
   "Hindu": "green",
   "Islamic": "pink",
   "Hebrew": "violet",

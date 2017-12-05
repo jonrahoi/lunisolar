@@ -71,6 +71,18 @@ const holidays = {
       calendar : "Hindu"
     }
   },
+  "Holi" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.holi(year)),
+      calendar : "Hindu"
+    }
+  },
+  "Makar Sankranti" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.makar_sankranti(year)),
+      calendar : "Hindu"
+    }
+  },
   "Shivaratri" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.shiva(year)),
@@ -162,6 +174,12 @@ const holidays = {
   "Qingming" : (year) => {
     return {
       date : jsCal.gregorian_from_fixed(jsCal.qing_ming(year)),
+      calendar : "Chinese"
+    }
+  },
+  "Chongyang" : (year) => {
+    return {
+      date : jsCal.gregorian_from_fixed(jsCal.chongyang(year)),
       calendar : "Chinese"
     }
   }
