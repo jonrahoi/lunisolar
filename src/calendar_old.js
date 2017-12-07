@@ -97,9 +97,16 @@ const holidays = {
   },
   "Ramadan" : (year) => {
     let ramadanDate=[]
+    let fixed = jsCal.fixed_from_gregorian(jsCal.gregorian_date(year, jsCal.JANUARY, 1));
+    let islamic = jsCal.islamic_from_fixed(fixed);
+    let ramadan_start = jsCal.fixed_from_islamic(jsCal.islamic_date(islamic.year, 9, 1));
+    let ramadan_end = jsCal.fixed_from_islamic(jsCal.islamic_date(islamic.year, 10, 1)) - 1;
+
     for(let i=1; i<=30; i++){
+      console.log(`${year} : ${i} -- ${jsCal.islamic_in_gregorian(9, i, year)} :- ${JSON.stringify(jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(9, i, year)))}`);
       ramadanDate.push(jsCal.gregorian_from_fixed(jsCal.islamic_in_gregorian(9, i, year)))
     }
+
     return {
       date : ramadanDate,
       calendar : "Islamic"
@@ -186,8 +193,7 @@ const holidays = {
 }
 
 const getAllHolidaysForYear = (year, options) => {
-    const days = []
-    // const thisYear = moment([year])
+  const days = []
 
   const numDays = moment([year]).isLeapYear() ? 366 : 365
 
