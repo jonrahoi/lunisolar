@@ -14,13 +14,17 @@ const holidays = {
   "Lantern Festival" : (year) => {
     var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
     var chinese = jscal.chinese_from_fixed(fixed);
-
     var ret = [];
+    let lanternDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 1, chinese.leap, 15))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 1, chinese.leap, 15))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 1, chinese.leap, 15))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) lanternDate = ret[i]
+    }
+
     return {
-      date : ret,
+      date : lanternDate,
       calendar : "Chinese"
     }
   },
@@ -30,11 +34,15 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let longtaitouDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 2, chinese.leap, 2))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 2, chinese.leap, 2))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 2, chinese.leap, 2))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) longtaitouDate = ret[i]
+    }
     return {
-      date : ret,
+      date : longtaitouDate,
       calendar : "Chinese"
     }
   },
@@ -44,17 +52,22 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let doubleThirdDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 3, chinese.leap, 3))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 3, chinese.leap, 3))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 3, chinese.leap, 3))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) doubleThirdDate = ret[i]
+    }
     return {
-      date : ret,
+      date : doubleThirdDate,
       calendar : "Chinese"
     }
   },
   "Qingming" : (year) => {
+    //console.log(jscal.solar_term(5, year));
     return {
-      date : jscal.qing_ming(year),
+      date : jscal.gregorian_from_fixed(jscal.qing_ming(year)),
       calendar : "Chinese"
     }
   },
@@ -64,11 +77,15 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let dragonBoatDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 5, chinese.leap, 5))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 5, chinese.leap, 5))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 5, chinese.leap, 5))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) dragonBoatDate = ret[i]
+    }
     return {
-      date : ret,
+      date : dragonBoatDate,
       calendar : "Chinese"
     }
   },
@@ -78,11 +95,15 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let qixiDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 7, chinese.leap, 7))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 7, chinese.leap, 7))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 7, chinese.leap, 7))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) qixiDate = ret[i]
+    }
     return {
-      date : ret,
+      date : qixiDate,
       calendar : "Chinese"
     }
   },
@@ -92,11 +113,15 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let ghostDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 7, chinese.leap, 15))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 7, chinese.leap, 15))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 7, chinese.leap, 15))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) ghostDate = ret[i]
+    }
     return {
-      date : ret,
+      date : ghostDate,
       calendar : "Chinese"
     }
   },
@@ -106,11 +131,15 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let midAutumnDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 8, chinese.leap, 15))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 8, chinese.leap, 15))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 8, chinese.leap, 15))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) midAutumnDate = ret[i]
+    }
     return {
-      date : ret,
+      date : midAutumnDate,
       calendar : "Chinese"
     }
   },
@@ -120,25 +149,15 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let chongyangDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 9, chinese.leap, 9))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 9, chinese.leap, 9))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 9, chinese.leap, 9))));
-    return {
-      date : ret,
-      calendar : "Chinese"
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) chongyangDate = ret[i]
     }
-  },
-  //15th day of the 10th lunar month	Spirit Festival / Water Lantern Festival
-  "Spirit Festival" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
-    var chinese = jscal.chinese_from_fixed(fixed);
-
-    var ret = [];
-    ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 10, chinese.leap, 15))));
-    ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 10, chinese.leap, 15))));
-    ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 10, chinese.leap, 15))));
     return {
-      date : ret,
+      date : chongyangDate,
       calendar : "Chinese"
     }
   },
@@ -148,11 +167,15 @@ const holidays = {
     var chinese = jscal.chinese_from_fixed(fixed);
 
     var ret = [];
+    let labaDate
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year, 0, chinese.leap, 8))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 1, 0, chinese.leap, 8))));
     ret.push(jscal.gregorian_from_fixed(jscal.fixed_from_chinese(jscal.chinese_date(chinese.cycle, chinese.year + 2, 0, chinese.leap, 8))));
+    for(let i=0; i<ret.length; i++){
+      if(year===ret[i].year) labaDate = ret[i]
+    }
     return {
-      date : ret,
+      date : labaDate,
       calendar : "Chinese"
     }
   },
@@ -241,10 +264,8 @@ const holidays = {
     }
   },
   "Holocaust Memorial Day" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
-    var hebrew = jscal.hebrew_from_fixed(fixed);
     return {
-      date : jscal.gregorian_from_fixed(jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.NISAN, 27))),
+      date : jscal.gregorian_date(year, jscal.JANUARY, 27),
       calendar : "Hebrew"
     }
   },
@@ -281,7 +302,7 @@ const holidays = {
     }
   },
   "Rosh Hashanah" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
+    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year+1, jscal.JANUARY, 1));
     var hebrew = jscal.hebrew_from_fixed(fixed);
     var fd_start = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 1));
     var fd_end = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 2));
@@ -296,17 +317,15 @@ const holidays = {
     }
   },
   "Yom Kippur" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
-    var hebrew = jscal.hebrew_from_fixed(fixed);
     return {
-      date : jscal.gregorian_from_fixed(jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 10))),
+      date : jscal.gregorian_from_fixed(jscal.yom_kippur(year)),
       calendar : "Hebrew"
     }
   },
   "Sukkot" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
+    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year+1, jscal.JANUARY, 1));
     var hebrew = jscal.hebrew_from_fixed(fixed);
-    var fd_start = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 15));
+    var fd_start = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 14));
     var fd_end = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 21));
 
     var ret = [];
@@ -319,7 +338,7 @@ const holidays = {
     }
   },
   "Shemini Atzeret" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
+    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year+1, jscal.JANUARY, 1));
     var hebrew = jscal.hebrew_from_fixed(fixed);
     return {
       date : jscal.gregorian_from_fixed(jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 22))),
@@ -327,7 +346,7 @@ const holidays = {
     }
   },
   "Simchat Torah" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
+    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year+1, jscal.JANUARY, 1));
     var hebrew = jscal.hebrew_from_fixed(fixed);
     return {
       date : jscal.gregorian_from_fixed(jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TISHRI, 23))),
@@ -335,11 +354,10 @@ const holidays = {
     }
   },
   "Hanukkah" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
+    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year+1, jscal.JANUARY, 1));
     var hebrew = jscal.hebrew_from_fixed(fixed);
-    var fd_start = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.KISLEV, 25));
-    var fd_end = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TEVET, 3));
-
+    var fd_start = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.KISLEV, 24));
+    var fd_end = jscal.fixed_from_hebrew(jscal.hebrew_date(hebrew.year, jscal.TEVET, 2));
     var ret = [];
     for (var i = fd_start; i <= fd_end; i++) {
       ret.push(jscal.gregorian_from_fixed(i));
@@ -349,11 +367,8 @@ const holidays = {
       calendar : "Hebrew"
     }
   },
-
-
-  //Mahavir Jayanti
   "Mahavir Jayanti" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
+    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year+1, jscal.JANUARY, 1));
     var old_hindu = jscal.old_hindu_lunar_from_fixed(fixed);
     return {
       date : jscal.gregorian_from_fixed(jscal.fixed_from_old_hindu_lunar(jscal.old_hindu_lunar_date(old_hindu.year, 1, old_hindu.leap, 14))),
@@ -391,11 +406,11 @@ const holidays = {
       calendar : "Hindu"
     }
   },
-  "Gudi Padva" : (year) => {
-    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
-    var old_hindu = jscal.old_hindu_lunar_from_fixed(fixed);
+  "Gudi Padwa" : (year) => {
+    var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year+1, jscal.JANUARY, 1));
+    var hindu = jscal.hindu_lunar_from_fixed(fixed);
     return {
-      date : jscal.gregorian_from_fixed(jscal.fixed_from_old_hindu_lunar(jscal.old_hindu_lunar_date(old_hindu.year, 1, old_hindu.leap, 1))),
+      date : jscal.gregorian_from_fixed(jscal.fixed_from_hindu_lunar(jscal.hindu_lunar_date(hindu.year, 1, hindu.leap, 1))),
       calendar : "Hindu"
     }
   },
@@ -445,12 +460,6 @@ const holidays = {
   "Cinco de Mayo" : (year) => {
     return {
       date : jscal.gregorian_from_fixed(jscal.fixed_from_gregorian(jscal.gregorian_date(year,jscal.MAY, 5))),
-      calendar : "Roman"
-    }
-  },
-  "Memorial Day" : (year) => {
-    return {
-      date : jscal.gregorian_from_fixed(jscal.memorial_day(year)),
       calendar : "Roman"
     }
   },

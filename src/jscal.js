@@ -1,3 +1,6 @@
+const solstice = require('astronomia/lib/solstice')
+const planetpos = require('astronomia/lib/planetposition')
+const earth = new planetpos.Planet(require('astronomia/data/vsop87Bearth.js'))
 const jsCal = {
     /* helper functions */
     BOGUS:"bogus",
@@ -3010,6 +3013,17 @@ const jsCal = {
         var tee = this.solar_longitude_after(lam, this.universal_from_standard(date, this.chinese_location(date)));
         return this.standard_from_universal(tee, this.chinese_location(tee));
     },
+
+    /*"solar_term":function (term, gyear) {
+        if (gyear && term <= 3) gyear--
+        let years = gyear || this.yearFromEpochCycle()
+        let lon = (((term + 20) % 24) * 15) % 360
+        let p = 180 / Math.PI
+        let date = this.fixed_from_gregorian(this.gregorian_date(gyear, this.MARCH, 30))
+        let st = this.midnight_in_china(this.solar_longitude(date));
+        //st = this.midnight(st)
+        return this.fixed_from_julian(st)
+    },*/
 
     "current_major_solar_term":function (date) {
         var s = this.solar_longitude(this.universal_from_standard(date, this.chinese_location(date)));
