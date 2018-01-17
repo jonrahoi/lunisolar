@@ -269,7 +269,7 @@ const holidays = {
       calendar : "Hebrew"
     }
   },
-  "Yom Ha'atzmaut" : (year) => {
+  "Yom HaAtzmaut" : (year) => {
     var fixed = jscal.fixed_from_gregorian(jscal.gregorian_date(year, jscal.JANUARY, 1));
     var hebrew = jscal.hebrew_from_fixed(fixed);
     return {
@@ -514,22 +514,24 @@ const getAllHolidaysForYear = (year, options) => {
     const h = holidays[name](year)
     h.name = name
     let date, dayOfYear, day
-    if(h.date instanceof Array){
-      h.date.forEach(d=>{
-        date = moment(`${d.month}-${d.day}-${d.year}`, 'M-D-YYYY')
+    if(h.date!==undefined){
+      if(h.date instanceof Array){
+        h.date.forEach(d=>{
+          date = moment(`${d.month}-${d.day}-${d.year}`, 'M-D-YYYY')
+          dayOfYear = date.dayOfYear()
+          day = days[dayOfYear]
+          if (day){
+            day.holidays.push(h)
+          }
+        })
+      }
+      else{
+        date = moment(`${h.date.month}-${h.date.day}-${h.date.year}`, 'M-D-YYYY')
         dayOfYear = date.dayOfYear()
         day = days[dayOfYear]
         if (day){
           day.holidays.push(h)
         }
-      })
-    }
-    else{
-      date = moment(`${h.date.month}-${h.date.day}-${h.date.year}`, 'M-D-YYYY')
-      dayOfYear = date.dayOfYear()
-      day = days[dayOfYear]
-      if (day){
-        day.holidays.push(h)
       }
     }
   })

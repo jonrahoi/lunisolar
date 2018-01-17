@@ -1,6 +1,3 @@
-const solstice = require('astronomia/lib/solstice')
-const planetpos = require('astronomia/lib/planetposition')
-const earth = new planetpos.Planet(require('astronomia/data/vsop87Bearth.js'))
 const jsCal = {
     /* helper functions */
     BOGUS:"bogus",
