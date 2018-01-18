@@ -1,0 +1,3 @@
+dateFromInternet :::::::: dateFromCode
+
+Mon Sep 24 1900 00:00:00 GMT-0700 :::::::: Invalid date

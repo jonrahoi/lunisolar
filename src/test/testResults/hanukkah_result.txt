@@ -1,0 +1,3 @@
+dateFromInternet :::::::: dateFromCode
+
+Sat Dec 08 2012 00:00:00 GMT-0800 :::::::: Invalid date

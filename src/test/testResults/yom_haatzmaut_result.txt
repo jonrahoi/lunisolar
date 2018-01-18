@@ -1,0 +1,4 @@
+dateFromInternet :::::::: dateFromCode
+
+Wed May 10 2000 00:00:00 GMT-0700 :::::::: Wed May 10 2000 00:00:00 GMT-0700
+Thu Apr 26 2001 00:00:00 GMT-0700 :::::::: Sat Apr 28 2001 00:00:00 GMT-0700
