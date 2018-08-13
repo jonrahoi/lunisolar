@@ -33,7 +33,7 @@ class CalendarDay extends React.Component {
     let holidayText = ""
     let anotherDay
     if(this.props.daysOfYear[this.props.day]!==undefined){
-      anotherDay=this.props.daysOfYear[this.props.day]
+      anotherDay = this.props.daysOfYear[this.props.day]
       if(anotherDay.holidays.length !== 0){
         anotherDay.holidays.forEach((hol, idx) => {
           if(this.props.calendarSelection[hol.calendar] === "selected"){
@@ -61,7 +61,7 @@ mouseLeave(){
     let holidayText
     let anotherDay
     if(this.props.daysOfYear[this.props.day]!==undefined){
-      anotherDay=this.props.daysOfYear[this.props.day]
+      anotherDay = this.props.daysOfYear[this.props.day]
       if(anotherDay.holidays.length!=0){
         anotherDay.holidays.map((hol, idx) => {
           if(this.props.calendarSelection[hol.calendar] === "selected"){
