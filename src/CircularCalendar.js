@@ -158,26 +158,6 @@ class CircularCalendar extends React.Component {
       fill={'#922B21'}
       />
 
-      <Text
-      text={"Features:"}
-      fontStyle={'bold'}
-      x={(this.props.width/12)-130}
-      y={this.props.height/2}
-      fontSize={25}
-      fill={'#330066'}
-      />
-
-      <Text
-      text={"\n\n1. Select Calendar:\n\t\t\t\tSelect / Deselect a calendar \n\t\t\t\tto view corresponding holidays in \n\t\t\t\ttheir respective colors"+
-      "\n\n2. Right and Left arrow buttons (Blue):\n\t\t\t\tToggle forwards and backwards\n\t\t\t\t between years"+
-      "\n\n3. Right and Left arrow buttons (Red):\n\t\t\t\tAnimate holidays forwards and backwards\n\t\t\t\t between years"+
-      "\n\n4. Hover over holidays:\n\t\t\t\tView holiday tooltip and click on a holiday\n\t\t\t\t to redirect to wikipedia page"}
-      x={(this.props.width/12)-130}
-      y={this.props.height/2}
-      fontSize={20}
-      fill={'#330066'}
-      />
-
       </Group>
     )
   }
